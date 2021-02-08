@@ -46,15 +46,25 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '主页', icon: 'dashboard' }
     }]
   },
-
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/didmanager',
+    children: [{
+      path: 'didmanager',
+      name: 'Didmanager',
+      component: () => import('@/views/DIDManager/didmanager'),
+      meta: { title: 'DID身份管理', icon: 'table' }
+    }]
+  },
   {
     path: '/example',
     component: Layout,
