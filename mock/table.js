@@ -3,11 +3,11 @@ const Mock = require('mockjs')
 const data = Mock.mock({
   'items|30': [{
     id: '@id',
-    title: '@sentence(10, 20)',
-    'status|1': ['published', 'draft', 'deleted'],
-    author: 'name',
+    did: '@sentence(5, 10)',
+    'status|1': ['created', 'waiting', 'freshing'],
+    devicedistrict: '广东省广州市番禺区',
     display_time: '@datetime',
-    pageviews: '@integer(300, 5000)'
+    deviceposition: 'xx路xx号'
   }]
 })
 
