@@ -58,13 +58,36 @@ export const constantRoutes = [
     path: '/didmanager',
     component: Layout,
     redirect: '/didmanager',
-    children: [{
-      path: 'didmanager',
-      name: 'Didmanager',
-      component: () => import('@/views/DIDManager/didmanager'),
-      meta: { title: 'DID身份管理', icon: 'table' }
-    }]
+    name: 'didmanager',
+    meta: { title: '视频DID身份管理', icon: 'el-icon-s-tools' },
+    children: [
+      {
+        path: 'didlist',
+        name: 'Didlist',
+        component: () => import('@/views/DIDManager/didlist'),
+        meta: { title: '摄像头DID列表', icon: 'el-icon-caret-right' }
+      },
+      {
+        path: 'didcreate',
+        name: 'Didcreate',
+        component: () => import('@/views/DIDManager/didcreate'),
+        meta: { title: '摄像头DID注册', icon: 'el-icon-caret-right' }
+      },
+      {
+        path: 'didupdate',
+        name: 'Didupdate',
+        component: () => import('@/views/DIDManager/didregister'),
+        meta: { title: '用户DID管理', icon: 'el-icon-caret-right' }
+      },
+      // {
+      //   path: 'contractdeploy',
+      //   name: 'Contractdeploy',
+      //   component: () => import('@/views/DIDManager/contractdeploy'),
+      //   meta: { title: '智能合约部署', icon: 'el-icon-caret-right' }
+      // }
+    ]
   },
+
   {
     path: '/example',
     component: Layout,
