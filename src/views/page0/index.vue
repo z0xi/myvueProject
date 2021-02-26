@@ -26,11 +26,39 @@
         <el-main>
           <template>
             <el-row :gutter="20">
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-default btn-lg" @click="go">频繁过人</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">频繁过人</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
               <el-col :span="12" style="text-align: left">
@@ -69,51 +97,220 @@
                 </div>
               </el-col>
             </el-row>
+
             <el-row :gutter="20">
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-success" @click="go">昼伏夜出</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">昼伏夜出</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-success" @click="go">时空碰撞</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">时空碰撞</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
             </el-row>
             <el-row :gutter="20">
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-success" @click="go">首次出现</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">首次出现</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-success" @click="go">连续出现</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">连续出现</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
             </el-row>
             <el-row :gutter="20">
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-success" @click="go">感知离开</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">感知离开</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
-              <el-col :span="12">
+              <el-col :span="12" style="text-align: left">
                 <div class="grid-content bg-purple">
-                  <p class="bg-primary">
-                    <button type="button" class="btn btn-success" @click="go">精准同行分析</button>
-                  </p>
+
+                  <el-row>
+                    <el-col :span="7">
+                      <div class="grid-content bg-purple">
+                        <!--                        插入图片-->
+                        <div class="demo-image">
+                          <!--                          <div class="block" v-for="fit in fits" :key="fit">-->
+                          <div class="block">
+                            <span class="demonstration"></span>
+                            <el-image
+                              style="width: 150px; height: 150px"
+                              :src="url">
+                            </el-image>
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :span="17">
+                      <div class="grid-content bg-purple">
+                        <el-row-bg>
+                          <p class="bg-primary">
+                            <el-link type="primary" @click="go">精准同行分析</el-link>
+                          </p>
+                          <p>
+                            此技战法在没有嫌疑人的人脸图片信息时，在指定时间、区域范围内排查作案嫌疑人；又如某个时间段内找出所有出现在吸毒窝点的人。
+                          </p>
+                        </el-row-bg>
+
+                      </div>
+                    </el-col>
+                  </el-row>
                 </div>
               </el-col>
             </el-row>
