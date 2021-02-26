@@ -78,16 +78,21 @@ export const constantRoutes = [
         name: 'Didupdate',
         component: () => import('@/views/DIDManager/didregister'),
         meta: { title: '用户DID管理', icon: 'el-icon-caret-right' }
-      },
-      // {
-      //   path: 'contractdeploy',
-      //   name: 'Contractdeploy',
-      //   component: () => import('@/views/DIDManager/contractdeploy'),
-      //   meta: { title: '智能合约部署', icon: 'el-icon-caret-right' }
-      // }
+      }
     ]
   },
-
+  {
+    path: '/page0',
+    component: Layout,
+    children: [
+      {
+        path: 'page0',
+        component: () => import('@/views/page0/index'),
+        name: 'page0',
+        meta: { title: '技战法', icon: 'el-icon-caret-right', noCache: true }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
