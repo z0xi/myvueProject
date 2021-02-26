@@ -1,5 +1,18 @@
 <template>
   <div class="app-container">
+    <el-upload
+      class="upload-demo"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      multiple
+      :limit="1"
+      :on-exceed="handleExceed"
+      :file-list="fileList">
+      <el-button size="big" type="primary">点击上传</el-button>
+      <div slot="tip" class="el-upload__tip">批量上传摄像头信息</div>
+    </el-upload>
     <el-form  ref="form" :model="form" label-width="160px">
       <el-form-item label="摄像头设备名称:">
         <el-input v-model="form.devicename" />
@@ -45,10 +58,25 @@ export default {
         deviceorganization:'居委会',
         devicename:'小米XX型号',
         deviceinfo:'小米摄像头'
-      }
+      },
+      fileList: [{name: '', url: ''}]
     }
   },
   methods: {
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`只能上传一个文件`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
+      }
+    },
     onSubmit() {
       this.$message('submit!')
     },
