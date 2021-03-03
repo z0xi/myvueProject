@@ -8,8 +8,7 @@
         搜索
       </el-button>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
-                 @click="handleDownload"
-      >
+                 @click="handleDownload">
         导出
       </el-button>
     </div>
@@ -20,7 +19,6 @@
       element-loading-text="Loading"
       border
       fit
-
     >
       <el-table-column align="center" label="序号" width="95">
         <template slot-scope="scope">
@@ -87,11 +85,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          Cancel
-        </el-button>
-        <el-button type="primary" @click="updateData()">
-          Confirm
+        <el-button @click="updateData()">
+          确定
         </el-button>
       </div>
     </el-dialog>
@@ -99,8 +94,7 @@
     <el-dialog
       title="credential内容"
       :visible.sync="credentialVisible"
-      width="30%"
-      :before-close="handleClose">
+      width="30%">
       <span>{{credentialcontent}}}</span>
       <span slot="footer" class="dialog-footer">
     <el-button @click="credentialVisible = false">取 消</el-button>
@@ -146,6 +140,7 @@ export default {
       dialogStatus: '',
       credentialVisible:false,
       credentialcontent:"{{json内容}}",
+      downloadLoading:false
     }
   },
   created() {
@@ -192,6 +187,7 @@ export default {
       }))
     },
     updateData() {
+      this.dialogFormVisible = false
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)// change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464

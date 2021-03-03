@@ -63,7 +63,6 @@ export default {
     }
   },
   methods: {
-    methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -75,8 +74,7 @@ export default {
       },
       beforeRemove(file, fileList) {
         return this.$confirm(`确定移除 ${ file.name }？`);
-      }
-    },
+      },
     onSubmit() {
       this.$message('submit!')
     },

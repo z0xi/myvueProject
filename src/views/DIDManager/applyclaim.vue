@@ -7,11 +7,6 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
-                 @click="handleDownload"
-      >
-        导出
-      </el-button>
     </div>
 
     <el-table
@@ -61,13 +56,12 @@
     <el-dialog
       title="credential内容"
       :visible.sync="credentialVisible"
-      width="30%"
-      :before-close="handleClose">
+      width="30%">
       <span>{{credentialcontent}}}</span>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="credentialVisible = false">取 消</el-button>
     <el-button type="primary" @click="credentialVisible = false">确 定</el-button>
   </span>
+
     </el-dialog>
     <el-dialog title="修改该摄像头信息" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="100px"
@@ -82,10 +76,10 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
-          Cancel
+          取消
         </el-button>
         <el-button type="primary" @click="updateData()">
-          Confirm
+          确定
         </el-button>
       </div>
     </el-dialog>
@@ -94,10 +88,12 @@
 </template>
 
 <script>
+import waves from '@/directive/waves' // waves directive
 import { getList } from '@/api/table'
 
 export default {
   name: 'applyclaim',
+  directives: { waves },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -129,6 +125,7 @@ export default {
     this.fetchData()
   },
   methods: {
+
     fetchData(){
       this.listLoading = true
       getList().then(response => {
@@ -144,7 +141,14 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
+    }, handleFilter() {/*这里可以加个waves效果，接口需要有个get方法query接口，使用listQuery作为参数质询*/
+      this.listQuery.page = 1
+      // getList(this.listQuery).then(response => {
+      //   this.list = response.data.items
+      //   this.listLoading = false
+      // })这里调用接口
     },
+
     handleDelete(row, index) {
       this.$notify({
         title: 'Success',

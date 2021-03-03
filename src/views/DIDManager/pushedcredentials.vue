@@ -66,11 +66,9 @@
     <el-dialog
       title="credential内容"
       :visible.sync="credentialVisible"
-      width="30%"
-      :before-close="handleClose">
+      width="30%">
       <span>{{credentialcontent}}}</span>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="credentialVisible = false">取 消</el-button>
     <el-button type="primary" @click="credentialVisible = false">确 定</el-button>
   </span>
     </el-dialog>
@@ -87,10 +85,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
-          Cancel
-        </el-button>
-        <el-button type="primary" @click="updateData()">
-          Confirm
+          确定
         </el-button>
       </div>
     </el-dialog>
@@ -99,10 +94,12 @@
 </template>
 
 <script>
+import waves from '@/directive/waves' // waves directive
 import { getList } from '@/api/table'
 
 export default {
   name: 'pushcredentials',
+  directives: { waves },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -134,6 +131,25 @@ export default {
     this.fetchData()
   },
   methods: {
+    handleDownload() {
+      this.downloadLoading = true
+      console.log(this.list)
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ['id', 'did', 'district', 'position', 'display_time']
+        const filterVal = ['id', 'title', 'devicedistrict', 'deviceposition', 'display_time']
+        const data = this.formatJson(filterVal)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: 'table-list'
+        })
+        this.downloadLoading = false
+      })
+    },
+    handleFilter() {
+      this.listQuery.page = 1
+      this.getList()
+    },
     fetchData(){
       this.listLoading = true
       getList().then(response => {
