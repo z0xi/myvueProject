@@ -102,7 +102,7 @@ export const constantRoutes = [
   {
     path: '/DIDManager',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'didregister',
@@ -113,14 +113,41 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/page0',
+    path: '/Technical methods',
     component: Layout,
     children: [
       {
-        path: 'page0',
-        component: () => import('@/views/page0/index'),
-        name: 'page0',
-        meta: { title: '技战法', icon: 'el-icon-caret-right', noCache: true }
+        path: 'Technical methods',
+        component: () => import('@/views/Technical methods/index'),
+        name: 'Technical methods',
+        meta: { title: '技战法', icon: 'tree-table', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/Video Function',
+    component: Layout,
+    //redirect: '/example/table',
+    name: 'Video Function',
+    meta: { title: '视频功能', icon: 'star' },
+    children: [
+      {
+        path: 'Video Inquire',
+        name: 'Video Inquire',
+        component: () => import('@/views/Video Function/Video Inquire/index'),
+        meta: { title: '视频查询', icon: 'search' }
+      },
+      {
+        path: 'Video Analyze',
+        name: 'Video Analyze',
+        component: () => import('@/views/Video Function/Video Analyze/index'),
+        meta: { title: '视频分析', icon: 'documentation' }
+      },
+      {
+        path: 'Video Check',
+        name: 'Video Check',
+        component: () => import('@/views/Video Function/Video Check/index'),
+        meta: { title: '视频查看', icon: 'eye-open' }
       }
     ]
   },
@@ -168,6 +195,20 @@ export const constantRoutes = [
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: 'Form', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/videoplayer',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: 'Videoplayer',
+        component: () => import('@/views/videoplayer/index'),
+        meta: { title: '视频播放', icon: 'form' }
       }
     ]
   },

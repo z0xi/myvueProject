@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import axios from 'axios'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
@@ -15,6 +15,9 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 import * as filters from './filters' // global filters
+
+import VideoPlayer from 'vue-video-player' //引入视频插件
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -33,11 +36,18 @@ Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 // register global utility filters
+
+Vue.use(VideoPlayer);//使用视频插件
+Vue.prototype.$axios = axios
+
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
 Vue.config.productionTip = false
+
+
+
 
 new Vue({
   el: '#app',
