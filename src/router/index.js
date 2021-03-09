@@ -125,6 +125,27 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/Document',
+    component: Layout,
+    redirect: '/document',
+    name: 'document',
+    meta: { title: '一人一档', icon: 'el-icon-document' },
+    children: [
+      {
+        path: 'summary',
+        name: 'summary',
+        component: () => import('@/views/document/summary/index'),
+        meta: { title: '档案汇总', icon: 'el-icon-menu' }
+      },
+      {
+        path: 'detail',
+        name: 'detail',
+        component: () => import('@/views/document/summary/index'),
+        meta: { title: '档案详情', icon: 'el-icon-menu' }
+      }
+    ]
+  },
+  {
     path: '/VideoFunction',
     component: Layout,
     //redirect: '/example/table',
@@ -148,26 +169,6 @@ export const constantRoutes = [
         name: 'VideoCheck',
         component: () => import('@/views/VideoFunction/VideoCheck/index'),
         meta: { title: '视频查看', icon: 'eye-open' }
-      }
-    ]
-  },
-  {
-    path: '/document',
-    component: Layout,
-    name: 'Document',
-    meta: { title: '一人一档', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'documentSearch',
-        name: 'DocumentSearch',
-        component: () => import('@/views/document/documentSearch/index'),
-        meta: { title: '检索结果', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
       }
     ]
   },
@@ -220,14 +221,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/VideoPlayer',
+    path: '/videoplayer',
     component: Layout,
     hidden: true,
     children: [
       {
         path: 'index',
         name: 'Videoplayer',
-        component: () => import('@/views/VideoPlayer/index'),
+        component: () => import('@/views/videoplayer/index'),
         meta: { title: '视频播放', icon: 'form' }
       }
     ]
