@@ -464,7 +464,7 @@ export default {
   methods: {
 
     // videoPlay() {
-    // this.$router.push('/videoplayer/index')
+    // this.$router.push('/VideoPlayer/index')
     // },
 
 

@@ -1,8 +1,10 @@
 <template>
   <div class="homeWrap">
     <el-container style="height: 100%; border: 1px solid #eee">
-      <el-aside width="200px" height="100%" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
+<!--      <el-aside width="200px" height="100%" style="background-color: rgb(238, 241, 246)">-->
+      <el-aside width="200px" height="100%">
+        <el-menu :default-openeds="['1']" background-color="transparent" default-active="1" text-color="#bfcbd9"
+                 active-text-color="#005AB5">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message" text-align="center" />技战法</template>
             <el-menu-item index="1-1" text-align="center">通用技战法</el-menu-item>
@@ -15,6 +17,13 @@
             <el-menu-item index="1-8" text-align="center">医闹肇事</el-menu-item>
             <el-menu-item index="1-9" text-align="center">精神病人</el-menu-item>
             <el-menu-item index="1-10" text-align="center">社区管控</el-menu-item>
+            <el-menu-item index="1-11" text-align="center">上访管控</el-menu-item>
+            <el-menu-item index="1-12" text-align="center">FK监测</el-menu-item>
+            <el-menu-item index="1-13" text-align="center">涉毒打击</el-menu-item>
+            <el-menu-item index="1-14" text-align="center">GB重点</el-menu-item>
+            <el-menu-item index="1-15" text-align="center">医闹肇事</el-menu-item>
+            <el-menu-item index="1-16" text-align="center">精神病人</el-menu-item>
+            <el-menu-item index="1-17" text-align="center">社区管控</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>

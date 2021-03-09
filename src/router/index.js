@@ -99,41 +99,78 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/DIDManager',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'didregister',
+        component: () => import('@/views/DIDManager/didregister'),
+        name: 'didregister',
+        meta: { title: '技战法', icon: 'el-icon-caret-right', noCache: true }
+      }
+    ]
+  },
   {
     path: '/TechnicalMethods',
     component: Layout,
     children: [
       {
         path: 'TechnicalMethods',
-        component: () => import('@/views/Technical methods/index'),
-        name: 'Technical methods',
+        component: () => import('@/views/TechnicalMethods/index'),
+        name: 'TechnicalMethods',
         meta: { title: '技战法', icon: 'tree-table', noCache: true }
       }
     ]
   },
   {
-    path: '/Document',
+    path: '/VideoFunction',
     component: Layout,
-    redirect: '/document',
-    name: 'document',
-    meta: { title: '一人一档', icon: 'el-icon-document' },
+    //redirect: '/example/table',
+    name: 'Video Function',
+    meta: { title: '视频功能', icon: 'star' },
     children: [
       {
-        path: 'summary',
-        name: 'summary',
-        component: () => import('@/views/document/summary/index'),
-        meta: { title: '档案汇总', icon: 'el-icon-menu' }
+        path: 'VideoInquire',
+        name: 'VideoInquire',
+        component: () => import('@/views/VideoFunction/VideoInquire/index'),
+        meta: { title: '视频查询', icon: 'search' }
       },
       {
-        path: 'detail',
-        name: 'detail',
-        component: () => import('@/views/document/summary/index'),
-        meta: { title: '档案详情', icon: 'el-icon-menu' }
+        path: 'VideoAnalyze',
+        name: 'VideoAnalyze',
+        component: () => import('@/views/VideoFunction/VideoAnalyze/index'),
+        meta: { title: '视频分析', icon: 'documentation' }
+      },
+      {
+        path: 'VideoCheck',
+        name: 'VideoCheck',
+        component: () => import('@/views/VideoFunction/VideoCheck/index'),
+        meta: { title: '视频查看', icon: 'eye-open' }
       }
     ]
   },
-
+  {
+    path: '/document',
+    component: Layout,
+    name: 'Document',
+    meta: { title: '一人一档', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'documentSearch',
+        name: 'DocumentSearch',
+        component: () => import('@/views/document/documentSearch/index'),
+        meta: { title: '检索结果', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
@@ -182,7 +219,19 @@ export const constantRoutes = [
     ]
   },
 
-
+  {
+    path: '/VideoPlayer',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: 'Videoplayer',
+        component: () => import('@/views/VideoPlayer/index'),
+        meta: { title: '视频播放', icon: 'form' }
+      }
+    ]
+  },
 
   {
     path: '/nested',
