@@ -99,25 +99,13 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
-    path: '/DIDManager',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'didregister',
-        component: () => import('@/views/DIDManager/didregister'),
-        name: 'didregister',
-        meta: { title: '技战法', icon: 'el-icon-caret-right', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/Technical methods',
+    path: '/TechnicalMethods',
     component: Layout,
     children: [
       {
-        path: 'Technical methods',
+        path: 'TechnicalMethods',
         component: () => import('@/views/Technical methods/index'),
         name: 'Technical methods',
         meta: { title: '技战法', icon: 'tree-table', noCache: true }
@@ -125,32 +113,27 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/Video Function',
+    path: '/Document',
     component: Layout,
-    //redirect: '/example/table',
-    name: 'Video Function',
-    meta: { title: '视频功能', icon: 'star' },
+    redirect: '/document',
+    name: 'document',
+    meta: { title: '一人一档', icon: 'el-icon-document' },
     children: [
       {
-        path: 'Video Inquire',
-        name: 'Video Inquire',
-        component: () => import('@/views/Video Function/Video Inquire/index'),
-        meta: { title: '视频查询', icon: 'search' }
+        path: 'summary',
+        name: 'summary',
+        component: () => import('@/views/document/summary/index'),
+        meta: { title: '档案汇总', icon: 'el-icon-menu' }
       },
       {
-        path: 'Video Analyze',
-        name: 'Video Analyze',
-        component: () => import('@/views/Video Function/Video Analyze/index'),
-        meta: { title: '视频分析', icon: 'documentation' }
-      },
-      {
-        path: 'Video Check',
-        name: 'Video Check',
-        component: () => import('@/views/Video Function/Video Check/index'),
-        meta: { title: '视频查看', icon: 'eye-open' }
+        path: 'detail',
+        name: 'detail',
+        component: () => import('@/views/document/summary/index'),
+        meta: { title: '档案详情', icon: 'el-icon-menu' }
       }
     ]
   },
+
   {
     path: '/example',
     component: Layout,
@@ -199,19 +182,7 @@ export const constantRoutes = [
     ]
   },
 
-  {
-    path: '/videoplayer',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        name: 'Videoplayer',
-        component: () => import('@/views/videoplayer/index'),
-        meta: { title: '视频播放', icon: 'form' }
-      }
-    ]
-  },
+
 
   {
     path: '/nested',
