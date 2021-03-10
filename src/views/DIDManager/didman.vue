@@ -90,7 +90,7 @@ export default {
         background: #36a3f7;
       }
 
-      .icon-money {
+      .icon-camera {
         background: #f4516c;
       }
 
@@ -107,7 +107,7 @@ export default {
       color: #36a3f7;
     }
 
-    .icon-money {
+    .icon-camera {
       color: #f4516c;
     }
 

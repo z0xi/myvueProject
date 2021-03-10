@@ -4,14 +4,14 @@
       <el-row :gutter="20">
 
         <el-col :span="6" :xs="24">
-          <user-card :user="user" />
+          <man-card :user="user" />
         </el-col>
 
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
               <el-tab-pane label="抓拍记录" name="activity">
-                <activity />
+                <shotrecord />
               </el-tab-pane>
               <el-tab-pane label="重点同行人分析" name="timeline">
                 <timeline />
@@ -30,14 +30,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import UserCard from './components/UserCard'
-import Activity from './components/Activity'
+import manCard from './components/manCard'
+import shotrecord from './components/shotrecord'
 import Timeline from './components/Timeline'
 import Account from './components/Account'
 
 export default {
   name: 'mandetail',
-  components: { UserCard, Activity, Timeline, Account },
+  components: { manCard, shotrecord, Timeline, Account },
   data() {
     return {
       user: {},

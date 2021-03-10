@@ -21,11 +21,23 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    chartData: {
+      type: Object,
+      required: true
     }
   },
   data() {
     return {
       chart: null
+    }
+  },
+  watch: {
+    chartData: {
+      deep: true,
+      handler(val) {
+        this.setOptions(val)
+      }
     }
   },
   mounted() {
@@ -43,7 +55,10 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-
+      this.setOptions(this.chartData)
+    },
+    setOptions({ actualName, actualData } = {}) {
+      console.log(actualData)
       this.chart.setOption({
         tooltip: {
           trigger: 'item',
@@ -52,20 +67,15 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['未入网设备', '已入网设备', '待修理设备']
+          data: actualName
         },
         series: [
           {
-            name: '摄像头情况',
             type: 'pie',
             roseType: 'radius',
             radius: [15, 95],
             center: ['50%', '38%'],
-            data: [
-              { value: 320, name: '未入网设备' },
-              { value: 240, name: '已入网设备' },
-              { value: 149, name: '待修理设备' }
-            ],
+            data: actualData,
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }

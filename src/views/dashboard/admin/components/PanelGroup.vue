@@ -2,8 +2,8 @@
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="peoples" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-watching">
+          <svg-icon icon-class="watching-icon" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
@@ -15,8 +15,8 @@
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-video">
+          <svg-icon icon-class="video-icon" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
@@ -28,8 +28,8 @@
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
-        <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-camera">
+          <svg-icon icon-class="camera-icon" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
@@ -41,8 +41,8 @@
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
-        <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="shopping" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-man">
+          <svg-icon icon-class="man-icon" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
@@ -72,10 +72,10 @@ export default {
 
 <style lang="scss" scoped>
 .panel-group {
-  margin-top: 18px;
+  //margin-top: 1px;
 
   .card-panel-col {
-    margin-bottom: 32px;
+    margin-bottom: 1px;
   }
 
   .card-panel {
@@ -84,8 +84,8 @@ export default {
     font-size: 12px;
     position: relative;
     overflow: hidden;
-    color: #666;
-    background: #fff;
+    color: #fff;
+    //background: #fff;
     box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
     border-color: rgba(0, 0, 0, .05);
 
@@ -94,36 +94,36 @@ export default {
         color: #fff;
       }
 
-      .icon-people {
+      .icon-watching {
         background: #40c9c6;
       }
 
-      .icon-message {
+      .icon-video {
         background: #36a3f7;
       }
 
-      .icon-money {
+      .icon-camera {
         background: #f4516c;
       }
 
-      .icon-shopping {
+      .icon-man {
         background: #34bfa3
       }
     }
 
-    .icon-people {
+    .icon-watching {
       color: #40c9c6;
     }
 
-    .icon-message {
+    .icon-video {
       color: #36a3f7;
     }
 
-    .icon-money {
+    .icon-camera {
       color: #f4516c;
     }
 
-    .icon-shopping {
+    .icon-man {
       color: #34bfa3
     }
 
@@ -148,9 +148,10 @@ export default {
 
       .card-panel-text {
         line-height: 18px;
-        color: rgba(0, 0, 0, 0.45);
+        color: rgba(200, 200, 200, 0.45);
         font-size: 16px;
         margin-bottom: 12px;
+        color: #fff;
       }
 
       .card-panel-num {

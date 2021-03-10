@@ -1,5 +1,6 @@
 <template>
-  <el-table :data="list" style="width: 100%;padding-top: 15px;">
+  <div class="app-container">
+  <el-table :data="list" class="eltable"  style="width: 100%;padding-top: 15px;">
     <el-table-column label="任务" min-width="200">
       <template slot-scope="scope">
         {{ scope.row.order_no | orderNoFilter }}
@@ -18,6 +19,7 @@
       </template>
     </el-table-column>
   </el-table>
+    </div>
 </template>
 
 <script>
@@ -53,3 +55,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.el-table{
+  background-color: transparent;
+  color: #20a0ff;
+}
+</style>

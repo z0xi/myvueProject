@@ -108,7 +108,7 @@ export const constantRoutes = [
         path: 'didregister',
         component: () => import('@/views/DIDManager/didregister'),
         name: 'didregister',
-        meta: { title: '技战法', icon: 'el-icon-caret-right', noCache: true }
+        meta: { title: '授权机构DID管理', icon: 'el-icon-caret-right', noCache: true }
       }
     ]
   },
@@ -119,29 +119,8 @@ export const constantRoutes = [
       {
         path: 'TechnicalMethods',
         component: () => import('@/views/TechnicalMethods/index'),
-        name: 'TechnicalMethods',
+        name: 'Technicalethods',
         meta: { title: '技战法', icon: 'tree-table', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/Document',
-    component: Layout,
-    redirect: '/document',
-    name: 'document',
-    meta: { title: '一人一档', icon: 'el-icon-document' },
-    children: [
-      {
-        path: 'summary',
-        name: 'summary',
-        component: () => import('@/views/document/summary/index'),
-        meta: { title: '档案汇总', icon: 'el-icon-menu' }
-      },
-      {
-        path: 'detail',
-        name: 'detail',
-        component: () => import('@/views/document/summary/index'),
-        meta: { title: '档案详情', icon: 'el-icon-menu' }
       }
     ]
   },
@@ -169,6 +148,39 @@ export const constantRoutes = [
         name: 'VideoCheck',
         component: () => import('@/views/VideoFunction/VideoCheck/index'),
         meta: { title: '视频查看', icon: 'eye-open' }
+      }
+    ]
+  },
+  {
+    path: '/Document',
+    component: Layout,
+    redirect: '/document',
+    name: 'document',
+    meta: { title: '一人一档', icon: 'el-icon-document' },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/document/index'),
+        name: 'documentindex',
+        meta: { title: '档案分析', icon: 'el-icon-caret-right', noCache: true }
+      },
+      {
+        path: 'mandetail',
+        component: () => import('@/views/document/mandetail'),
+        name: 'mandetail',
+        meta: { title: '嫌疑人详情', icon: 'el-icon-caret-right', noCache: true }
+      },
+      {
+        path: 'summary',
+        name: 'summary',
+        component: () => import('@/views/document/summary/index'),
+        meta: { title: '档案汇总', icon: 'el-icon-menu' }
+      },
+      {
+        path: 'detail',
+        name: 'detail',
+        component: () => import('@/views/document/summary/index'),
+        meta: { title: '档案详情', icon: 'el-icon-menu' }
       }
     ]
   },
@@ -228,7 +240,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'Videoplayer',
-        component: () => import('@/views/videoplayer/index'),
+        component: () => import('@/views/VideoPlayer/index'),
         meta: { title: '视频播放', icon: 'form' }
       }
     ]

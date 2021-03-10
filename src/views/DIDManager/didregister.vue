@@ -4,7 +4,7 @@
       <el-button  type="primary" icon="el-icon-search" @click="handleregister(row)">
         注册DID
       </el-button>
-      <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
+      <el-button :loading="downloadLoading" style="margin-left:12px" class="filter-item" type="primary" icon="el-icon-download"
                  @click="handleDownload"
       >
         导出Authority Issuer列表
@@ -17,6 +17,7 @@
       element-loading-text="Loading"
       border
       fit
+      style="margin-top:18px"
     >
       <el-table-column align="center" label="序号" width="95">
         <template slot-scope="scope">

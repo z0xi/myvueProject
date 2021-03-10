@@ -4,10 +4,10 @@
       <el-input v-model="listQuery.title" placeholder="DID" style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleFilter"
       />
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-button v-waves class="filter-item" style="margin-left:12px" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
+      <el-button v-waves :loading="downloadLoading" style="margin-left:12px" class="filter-item" type="primary" icon="el-icon-download"
                  @click="handleDownload">
         导出
       </el-button>
@@ -19,6 +19,7 @@
       element-loading-text="Loading"
       border
       fit
+      style="margin-top:18px"
     >
       <el-table-column align="center" label="序号" width="95">
         <template slot-scope="scope">
@@ -243,9 +244,8 @@ export default {
 
 /*table item鼠标悬停颜色*/
 /deep/ .el-table tbody tr:hover > td {
-  background-color: #C0C4CC
+  background-color: #C0C4CC;
 }
-
 .pagination-container {
   background-color: transparent;
 }

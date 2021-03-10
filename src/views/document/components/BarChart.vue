@@ -23,11 +23,23 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    chartData: {
+      type: Object,
+      required: true
     }
   },
   data() {
     return {
       chart: null
+    }
+  },
+  watch: {
+    chartData: {
+      deep: true,
+      handler(val) {
+        this.setOptions(val)
+      }
     }
   },
   mounted() {
@@ -43,7 +55,11 @@ export default {
     this.chart = null
   },
   methods: {
-    initChart() {
+    initChart(){
+        this.chart = echarts.init(this.$el, 'macarons')
+        this.setOptions(this.chartData)
+      },
+    setOptions({ actualName, actualData } = {}) {
       this.chart = echarts.init(this.$el, 'macarons')
 
       this.chart.setOption({
@@ -62,7 +78,7 @@ export default {
         },
         yAxis: [{
           type: 'category',
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          data: actualName,//['涉毒人员身份库', '全国在逃身份库'],
           axisTick: {
             alignWithLabel: true
           }
@@ -76,23 +92,8 @@ export default {
         series: [{
           name: '正在分析任务',
           type: 'bar',
-          stack: 'vistors',
           barWidth: '60%',
-          data: [79, 52, 200, 334, 390, 330, 220],
-          animationDuration
-        }, {
-          name: '已完成任务',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [80, 52, 200, 334, 390, 330, 220],
-          animationDuration
-        }, {
-          name: '运行失败任务',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [30, 52, 200, 334, 390, 330, 220],
+          data: actualData,
           animationDuration
         }]
       })

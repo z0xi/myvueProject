@@ -3,7 +3,7 @@
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+    <el-row style="background:#2b2f3a;padding:4px 4px 0;margin-bottom:8px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
 
@@ -24,10 +24,6 @@
         </div>
       </el-col>
     </el-row>
-
-    <el-row :gutter="8">
-        <transaction-table />
-    </el-row>
   </div>
 </template>
 
@@ -37,7 +33,6 @@ import LineChart from './components/LineChart'
 import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
 import BarChart from './components/BarChart'
-import TransactionTable from './components/TransactionTable'
 
 
 const lineChartData = {
@@ -67,7 +62,6 @@ export default {
     RaddarChart,
     PieChart,
     BarChart,
-    TransactionTable,
   },
   data() {
     return {
@@ -85,20 +79,14 @@ export default {
 <style lang="scss" scoped>
 .dashboard-editor-container {
   padding: 32px;
-  background-color: rgb(240, 242, 245);
+  //background-color: rgb(240, 242, 245);
   position: relative;
 
-  .github-corner {
-    position: absolute;
-    top: 0px;
-    border: 0;
-    right: 0;
-  }
-
   .chart-wrapper {
-    background: #fff;
-    padding: 16px 16px 0;
-    margin-bottom: 32px;
+    //background: #fff;
+    padding: 8px 8px 0;
+    margin-bottom: 8px;
+
   }
 }
 

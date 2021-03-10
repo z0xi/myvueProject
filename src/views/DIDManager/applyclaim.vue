@@ -4,7 +4,7 @@
       <el-input v-model="listQuery.title" placeholder="申请方DID" style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleFilter"
       />
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-button v-waves class="filter-item"  style="margin-left:12px" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
     </div>
@@ -16,6 +16,7 @@
       border
       fit
       highlight-current-row
+      style="margin-top:18px"
     >
       <el-table-column align="center" label="序号" width="95">
         <template slot-scope="scope">
