@@ -24,13 +24,13 @@ import unrealnameDoc from './components/unrealnameDoc'
 export default {
 name: 'Document',
   components:{
-    activeDoc,
-    realnameDoc,
-    unrealnameDoc
+    activeDoc,//活跃档案
+    realnameDoc,//已实名档案
+    unrealnameDoc//未实名档案
 },
 data(){
 return{
-activeTab:'activity'
+activeTab:'activeDoc'//默认第一个页面
   }
   }
 }
