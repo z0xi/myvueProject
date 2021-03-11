@@ -16,7 +16,7 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import * as filters from './filters' // global filters
 
-import VideoPlayer from 'vue-video-player' //引入视频插件
+
 
 /**
  * If you don't want to use mock-server
@@ -37,7 +37,7 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 // register global utility filters
 
-Vue.use(VideoPlayer);//使用视频插件
+
 Vue.prototype.$axios = axios
 
 Object.keys(filters).forEach(key => {

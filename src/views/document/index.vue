@@ -109,11 +109,9 @@
 </template>
 
 <script>
-import PieChart from './components/PieChart'
-import PanelGroup from '@/views/dashboard/admin/components/PanelGroup'
-import LineChart from './components/LineChart'
-import RaddarChart from '@/views/dashboard/admin/components/RaddarChart'
-import BarChart from './components/BarChart'
+import PieChart from './detail/components/PieChart'
+import LineChart from './detail/components/LineChart'
+import BarChart from './detail/components/BarChart'
 
 export default {
   name: 'documentindex',

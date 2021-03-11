@@ -160,27 +160,21 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/document/index'),
+        component: () => import('@/views/document'),
         name: 'documentindex',
         meta: { title: '档案分析', icon: 'el-icon-caret-right', noCache: true }
       },
       {
         path: 'mandetail',
-        component: () => import('@/views/document/mandetail'),
+        component: () => import('@/views/document/detail/mandetail'),
         name: 'mandetail',
-        meta: { title: '嫌疑人详情', icon: 'el-icon-caret-right', noCache: true }
+        meta: { title: '档案详情', icon: 'el-icon-menu', noCache: true }
       },
       {
         path: 'summary',
         name: 'summary',
         component: () => import('@/views/document/summary/index'),
         meta: { title: '档案汇总', icon: 'el-icon-menu' }
-      },
-      {
-        path: 'detail',
-        name: 'detail',
-        component: () => import('@/views/document/summary/index'),
-        meta: { title: '档案详情', icon: 'el-icon-menu' }
       }
     ]
   },
