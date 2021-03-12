@@ -5,13 +5,13 @@
     </p>
     <el-row v-for="item in 2" :key="item">
       <el-col :span="3" v-for="(o, index) in 6" :key="o" :offset="index > 0 ? 1 : 0">
-        <el-card shadow=“hover” :body-style="{ padding: '10px'}">
+        <el-card shadow=“hover” :body-style="{ padding: '10px'}" class="card">
           <img src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg" class="image">
           <div style="padding: 8px;">
             <span>姓名</span>
             <p>身份证号</p>
             <div class="bottom">
-              <el-button type="text" class="button">操作按钮</el-button>
+              <el-button type="text" class="button">查看</el-button>
             </div>
           </div>
         </el-card>
@@ -42,6 +42,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .button {
@@ -58,5 +59,8 @@ export default {
   margin-bottom: 4px;
 
 }
-
+.card{
+  background-color: transparent;
+  color:white;
+}
 </style>
