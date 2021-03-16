@@ -53,8 +53,6 @@
 <script>
 export default {
   name: 'didman',
-
-  methods: {}
 }
 </script>
 

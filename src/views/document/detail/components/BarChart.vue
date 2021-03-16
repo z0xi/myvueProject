@@ -90,7 +90,6 @@ export default {
           }
         }],
         series: [{
-          name: '正在分析任务',
           type: 'bar',
           barWidth: '60%',
           data: actualData,

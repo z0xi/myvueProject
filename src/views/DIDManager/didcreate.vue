@@ -15,22 +15,22 @@
     </el-upload>
     <el-form  ref="form" :model="form" label-width="160px">
       <el-form-item label="摄像头设备名称:">
-        <el-input v-model="form.devicename" />
+        <el-input v-model="form.deviceName" />
       </el-form-item>
       <el-form-item label="摄像头设备信息:">
-        <el-input v-model="form.deviceinfo" />
+        <el-input v-model="form.deviceInfo" />
       </el-form-item>
       <el-form-item label="摄像头类别:">
-        <el-input v-model="form.devicecategory" />
+        <el-input v-model="form.deviceCategory" />
       </el-form-item>
       <el-form-item label="摄像头区域:">
-        <el-input v-model="form.devicedistrict" />
+        <el-input v-model="form.deviceDistrict" />
       </el-form-item>
       <el-form-item label="摄像头位置:">
-        <el-input v-model="form.deviceposition" />
+        <el-input v-model="form.devicePosition" />
       </el-form-item>
       <el-form-item label="所属单位:">
-        <el-input v-model="form.deviceorganization" />
+        <el-input v-model="form.deviceOrganization" />
       </el-form-item>
       <el-form-item>
         <el-tooltip class="item" effect="dark" content="点击为摄像头创建DID’" placement="right-end">
@@ -51,13 +51,13 @@ export default {
   data() {
     return {
       form: {
-        devicecategory:'A类',
+        deviceCategory:'A类',
         location:'广东省广州市XXX',
-        devicedistrict:"广东省广州市番禺区XX路",
-        deviceposition:'XX路XX号房',
-        deviceorganization:'居委会',
-        devicename:'小米XX型号',
-        deviceinfo:'小米摄像头'
+        deviceDistrict:"广东省广州市番禺区XX路",
+        devicePosition:'XX路XX号房',
+        deviceOrganization:'居委会',
+        deviceName:'小米XX型号',
+        deviceInfo:'小米摄像头'
       },
       fileList: [{name: '', url: ''}]
     }

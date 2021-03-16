@@ -4,20 +4,17 @@
       <el-row :gutter="20">
 
         <el-col :span="6" :xs="24">
-          <man-card :user="user" />
+          <man-card class="bg" :user="user" />
         </el-col>
 
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
               <el-tab-pane label="抓拍记录" name="activity">
-                <shotrecord />
+                <shotRecord />
               </el-tab-pane>
               <el-tab-pane label="重点同行人分析" name="timeline">
-                <timeline />
-              </el-tab-pane>
-              <el-tab-pane label="历史预警" name="account">
-                <account :user="user" />
+                <peer />
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -31,13 +28,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import manCard from './components/manCard'
-import shotrecord from './components/shotrecord'
-import Timeline from './components/Timeline'
-import Account from './components/Account'
+import shotRecord from './components/shotRecord'
+import peer from './components/peer'
 
 export default {
-  name: 'mandetail',
-  components: { manCard, shotrecord, Timeline, Account },
+  name: 'manDetail',
+  components: { manCard, shotRecord, peer },
   data() {
     return {
       user: {},
@@ -63,3 +59,9 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.el-card{
+  background-color: transparent;
+  color:white;
+}
+</style>

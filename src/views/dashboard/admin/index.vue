@@ -15,12 +15,12 @@
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <pie-chart />
+          <devicePie />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <bar-chart />
+          <taskBar />
         </div>
       </el-col>
     </el-row>
@@ -31,8 +31,8 @@
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
 import RaddarChart from './components/RaddarChart'
-import PieChart from './components/PieChart'
-import BarChart from './components/BarChart'
+import devicePie from './components/devicePie'
+import taskBar from './components/taskBar'
 
 
 const lineChartData = {
@@ -59,9 +59,9 @@ export default {
   components: {
     PanelGroup,
     LineChart,
-    RaddarChart,
-    PieChart,
-    BarChart,
+    RaddarChart,//未定
+    devicePie,
+    taskBar,
   },
   data() {
     return {

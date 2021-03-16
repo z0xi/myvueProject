@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="bg">
     <el-header>
       <el-date-picker
         v-model="value2"
@@ -13,7 +13,7 @@
       </el-date-picker>
       <el-select v-model="value" style="margin-left:12px" placeholder="选择视频源">
         <el-option
-          v-for="item in options"
+          v-for="item in cameraSrc"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -22,7 +22,6 @@
       </el-select>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
                  style="margin-left:12px"
-                 @click="handleDownload"
       >
         导出
       </el-button>
@@ -52,10 +51,27 @@
 </template>
 
 <script>
-
+import waves from '@/directive/waves/waves'
 export default {
+  directives: { waves },
   data() {
     return {
+      cameraSrc: [{
+        value: '选项1',
+        label: '1'
+      }, {
+        value: '选项2',
+        label: '2'
+      }, {
+        value: '选项3',
+        label: '3'
+      }, {
+        value: '选项4',
+        label: '4'
+      }, {
+        value: '选项5',
+        label: '5'
+      }],
       manphoto: [
         {
           photosrc: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
@@ -148,10 +164,9 @@ export default {
 }
 
 .el-aside {
-  background-color: #D3DCE6;
-  color: #333;
+  background-color: transparent;
+  color:white;
 }
-
 
 
 </style>

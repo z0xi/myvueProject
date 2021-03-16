@@ -1,14 +1,14 @@
 <template>
   <el-container>
     <el-aside style="padding:20px">
-        <div style="height:820px" class="grid-content bg-purple">
+        <div style="height:820px"  class="grid-content bg-purple">
           <div class="card-style" style="padding: 20px;">行为信息</div>
           <div class="card-style">
             <el-card :body-style="{ padding: '0px' }">
               <div style="padding: 6px;">
                 <span>0</span>
               </div>
-              <div style="padding: 6px;">
+              <div style=" padding: 6px;">
                 <span>档案总数</span>
               </div>
             </el-card>
@@ -170,28 +170,28 @@ export default {
 .el-col {
   border-radius: 4px;
 }
-.bg-purple-dark {
-  background: #99a9bf;
-}
+
 .bg-purple {
-  background: #d3dce6;
+  background-color: transparent;
+  color:white;
 }
-.bg-purple-light {
-  background: #e5e9f2;
-}
+
 .grid-content {
   border-radius: 4px;
   height:400px;
   min-height: 36px;
 }
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
+
 .card-style {
   width: 100%;
   margin-bottom: 80px;
-  background: #97a8be;
+  background-color: transparent;
+  color:white;
+}
+
+.el-card{
+  background-color: transparent;
+  color:white;
 }
 
 </style>
