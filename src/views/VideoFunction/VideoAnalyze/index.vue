@@ -40,7 +40,6 @@
               >
                 <el-input type="idNumber" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
               </el-form-item>
-
             </el-form>
             <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm" align="left">
               <el-form-item
@@ -53,9 +52,7 @@
               >
                 <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
               </el-form-item>
-
             </el-form>
-
             <el-form-item label="活动区域" align="left">
               <el-select v-model="form.region" placeholder="请选择活动区域">
                 <el-option label="区域一" value="shanghai"></el-option>
@@ -80,9 +77,6 @@
                 <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
               </el-col>
             </el-form-item>
-<!--            <el-form-item label="即时配送" align="left">-->
-<!--              <el-switch v-model="form.delivery"></el-switch>-->
-<!--            </el-form-item>-->
             <el-form-item label="性别" align="left">
               <el-radio-group v-model="form.resource">
                 <el-radio label="男性"></el-radio>
@@ -95,7 +89,6 @@
                 <el-checkbox label="饰品" name="type"></el-checkbox>
                 <el-checkbox label="身高" name="type"></el-checkbox>
                 <el-checkbox label="发型" name="type">
-
                 </el-checkbox>
               </el-checkbox-group>
             </el-form-item>
@@ -182,29 +175,20 @@
       </el-container>
     </el-tab-pane>
   </el-tabs>
-
-
-
-
-
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 
 export default {
   data() {
     return {
-
       // 标签页
       activeName: 'first',
-
       // 身份证号
       numberValidateForm: {
         age: '',
         idNumber: '',
-
       },
 
       // 表格表单
@@ -218,8 +202,6 @@ export default {
         resource: '',
         desc: ''
       },
-
-
       // 表格
       tableData: [{
         date: '2016-05-02',
@@ -250,8 +232,6 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     },
-
-
     // 身份证号
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -266,14 +246,10 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-
-
     // 勾选分析选项
     onSubmit() {
       console.log('submit!');
     },
-
-
 //上传视频/图片
     submitVideo() {
       var formData = new FormData();
@@ -311,7 +287,6 @@ export default {
       }
       return url;} } }
 </script>
-
 <style scoped>
 .el-header, .el-footer {
   background-color: #B3C0D1;
@@ -325,14 +300,12 @@ export default {
   text-align: center;
   line-height: 60px;
 }
-
 .el-main {
   background-color: #E9EEF3;
   color: #333;
   text-align: center;
   line-height: 50px;
 }
-
 body > .el-container {
   margin-bottom: 40px;
 }
@@ -341,15 +314,12 @@ body > .el-container {
 .el-container:nth-child(6) .el-aside {
   line-height: 260px;
 }
-
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
 }
-
 .bgColor {
   background-color: black;
 }
-
 </style>
 
 

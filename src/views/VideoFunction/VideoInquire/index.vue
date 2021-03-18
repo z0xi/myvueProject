@@ -1,33 +1,22 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-<!--      <el-input v-model="listQuery.title" placeholder="选择相应特征..." style="width: 200px;" class="filter-item"-->
-<!--                @keyup.enter.native="handleFilter"-->
-<!--      />-->
-<!--      <el-select v-model="listQuery.importance" placeholder="Imp" clearable style="width: 90px" class="filter-item">-->
-<!--        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />-->
-<!--      </el-select>-->
+      <!--      级联菜单-->
+      <el-cascader
+        v-model="value"
+        :options="options"
+        :props="{ expandTrigger: 'hover' }"
+        @change="handleChange"></el-cascader>
 
-<!--      级联菜单-->
-
-
-        <el-cascader
-          v-model="value"
-          :options="options"
-          :props="{ expandTrigger: 'hover' }"
-          @change="handleChange"></el-cascader>
-
-<!--      选择日期-->
-<!--        <span class="demonstration">Date</span>-->
-        <el-date-picker
-          v-model="value2"
-          align="right"
-          type="date"
-          placeholder="选择日期"
-          :picker-options="pickerOptions">
-        </el-date-picker>
-
-<!--      时间-->
+      <!--      选择日期-->
+      <el-date-picker
+        v-model="value2"
+        align="right"
+        type="date"
+        placeholder="选择日期"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+      <!--      时间-->
       <el-time-select
         placeholder="起始时间"
         v-model="startTime"
@@ -47,130 +36,11 @@
       minTime: startTime
     }">
       </el-time-select>
-
-
-
-
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         查询
       </el-button>
-<!--      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"-->
-<!--                 @click="handleDownload"-->
-<!--      >-->
-<!--        导出-->
-<!--      </el-button>-->
     </div>
 
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-
-    >
-      <el-table-column align="center" label="序号" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="DID" width="200" align="center">
-        <template slot-scope="scope" >
-          <el-button type="text" @click="credentialVisible = true">{{ scope.row.did }}</el-button>
-        </template>
-      </el-table-column>
-      <
-      <el-table-column label="摄像头区域" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.devicedistrict }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="摄像头位置" width="110" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.deviceposition }}
-        </template>
-      </el-table-column>
-<!--      <el-table-column class-name="status-col" label="状态" width="110" align="center">-->
-<!--        <template slot-scope="scope">-->
-<!--          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-      <el-table-column align="center" prop="created_at" label="DID
-      创建时间" width="200"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-time"/>
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" align="center" width="280" class-name="small-padding fixed-width">
-        <template slot-scope="{row,$index}">
-<!--          <el-button v-if="row.status!='created'" size="mini" type="success" @click="handleapply(row,$index)">-->
-<!--            申请-->
-<!--          </el-button>-->
-<!--          <el-button type="primary" size="mini" @click="handleUpdate(row)">-->
-<!--            更新-->
-<!--          </el-button>-->
-<!--          <el-button v-if="row.status!='freshing'" size="mini" type="danger" @click="handleDelete(row,$index)">-->
-<!--            删除-->
-<!--          </el-button>-->
-<!--          <el-button type="primary" size="mini" @click="videoPlay()">-->
-<!--            点击查看视频-->
-<!--              </el-button>-->
-            <el-button type="primary" size="mini" @click="dialogVisible = true">点击查看视频</el-button>
-            <el-dialog
-              title="提示"
-              :visible.sync="dialogVisible"
-              width="30%"
-              :before-close="handleClose">
-            <span>这是一段信息</span>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-              </span>
-            </el-dialog>
-
-
-        </template>
-      </el-table-column>
-    </el-table>
-    <!--这里暂时采用了后端分页，所以暂时没用-->
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
-                @pagination="fetchData"
-    />
-
-    <el-dialog title="修改该摄像头信息" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :model="temp" label-position="left" label-width="100px"
-               style="width: 400px; margin-left:50px;"
-      >
-        <el-form-item label="DID：" prop="DID">
-          <el-input v-model="temp.title"/>
-        </el-form-item>
-        <el-form-item label="摄像头位置：" prop="cameralocation">
-          <el-input v-model="temp.author"/>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          Cancel
-        </el-button>
-        <el-button type="primary" @click="updateData()">
-          Confirm
-        </el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog
-      title="credential内容"
-      :visible.sync="credentialVisible"
-      width="30%"
-      :before-close="handleClose">
-      <span>{{credentialcontent}}}</span>
-      <span slot="footer" class="dialog-footer">
-    <el-button @click="credentialVisible = false">取 消</el-button>
-    <el-button type="primary" @click="credentialVisible = false">确 定</el-button>
-  </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -194,290 +64,271 @@ export default {
       return statusMap[status]
     }
   },
-    data() {
-      return {
-
-        // 对话框
-        dialogVisible: false,
-
-
-        // 日期
-        pickerOptions: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          },
-          shortcuts: [{
-            text: '今天',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }, {
-            text: '昨天',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
-            }
-          }, {
-            text: '一周前',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
-            }
-          }]
+  data() {
+    return {
+      // 日期
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
         },
-        value1: '',
-        value2: '',
-
-
-        // 时间
-        startTime: '',
-        endTime: '',
-
-
-
-
-        list: null,
-          listLoading: true,
-        total: 0,
-        listQuery: {
-        page: 1,
-          limit: 10
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
       },
-        temp: {
-          title: ''
-        },
-        dialogFormVisible: false,
-          dialogStatus: '',
-        credentialVisible:false,
-        credentialcontent:"{{json内容}}",
+      value1: '',
+      value2: '',
 
 
-        value: [],
-        options: [{
-          value: 'xingren',
-          label: '行人',
+      // 时间
+      startTime: '',
+      endTime: '',
+
+
+      list: null,
+      listLoading: true,
+      total: 0,
+      listQuery: {
+        page: 1,
+        limit: 10
+      },
+      temp: {
+        title: ''
+      },
+      dialogFormVisible: false,
+      dialogStatus: '',
+      credentialVisible:false,
+      credentialcontent:"{{json内容}}",
+
+
+      value: [],
+      options: [{
+        value: 'xingren',
+        label: '行人',
+        children: [{
+          value: 'nanxing',
+          label: '男性',
           children: [{
-            value: 'nanxing',
-            label: '男性',
-            children: [{
-              value: 'xingwei',
-              label: '行为'
-            }, {
-              value: 'yizhuo',
-              label: '衣着'
-            }, {
-              value: 'nianling',
-              label: '年龄'
-            }, {
-              value: 'shengao',
-              label: '身高'
-            }, {
-              value: 'faxing',
-              label: '发型'
-            }, {
-              value: 'titai',
-              label: '体态'
-            }]
+            value: 'xingwei',
+            label: '行为'
           }, {
-            value: 'nvxing',
-            label: '女性',
-            children: [{
-              value: 'xingwei',
-              label: '行为'
-            }, {
-              value: 'yizhuo',
-              label: '衣着'
-            }, {
-              value: 'nianling',
-              label: '年龄'
-            }, {
-              value: 'shengao',
-              label: '身高'
-            }, {
-              value: 'faxing',
-              label: '发型'
-            }, {
-              value: 'titai',
-              label: '体态'
-            }]
+            value: 'yizhuo',
+            label: '衣着'
+          }, {
+            value: 'nianling',
+            label: '年龄'
+          }, {
+            value: 'shengao',
+            label: '身高'
+          }, {
+            value: 'faxing',
+            label: '发型'
+          }, {
+            value: 'titai',
+            label: '体态'
           }]
         }, {
-          value: 'cheliang',
-          label: '车辆',
+          value: 'nvxing',
+          label: '女性',
           children: [{
-            value: 'basic',
-            label: 'Basic',
-            children: [{
-              value: 'layout',
-              label: 'Layout 布局'
-            }, {
-              value: 'color',
-              label: 'Color 色彩'
-            }, {
-              value: 'typography',
-              label: 'Typography 字体'
-            }, {
-              value: 'icon',
-              label: 'Icon 图标'
-            }, {
-              value: 'button',
-              label: 'Button 按钮'
-            }]
+            value: 'xingwei',
+            label: '行为'
           }, {
-            value: 'form',
-            label: 'Form',
-            children: [{
-              value: 'radio',
-              label: 'Radio 单选框'
-            }, {
-              value: 'checkbox',
-              label: 'Checkbox 多选框'
-            }, {
-              value: 'input',
-              label: 'Input 输入框'
-            }, {
-              value: 'input-number',
-              label: 'InputNumber 计数器'
-            }, {
-              value: 'select',
-              label: 'Select 选择器'
-            }, {
-              value: 'cascader',
-              label: 'Cascader 级联选择器'
-            }, {
-              value: 'switch',
-              label: 'Switch 开关'
-            }, {
-              value: 'slider',
-              label: 'Slider 滑块'
-            }, {
-              value: 'time-picker',
-              label: 'TimePicker 时间选择器'
-            }, {
-              value: 'date-picker',
-              label: 'DatePicker 日期选择器'
-            }, {
-              value: 'datetime-picker',
-              label: 'DateTimePicker 日期时间选择器'
-            }, {
-              value: 'upload',
-              label: 'Upload 上传'
-            }, {
-              value: 'rate',
-              label: 'Rate 评分'
-            }, {
-              value: 'form',
-              label: 'Form 表单'
-            }]
+            value: 'yizhuo',
+            label: '衣着'
           }, {
-            value: 'data',
-            label: 'Data',
-            children: [{
-              value: 'table',
-              label: 'Table 表格'
-            }, {
-              value: 'tag',
-              label: 'Tag 标签'
-            }, {
-              value: 'progress',
-              label: 'Progress 进度条'
-            }, {
-              value: 'tree',
-              label: 'Tree 树形控件'
-            }, {
-              value: 'pagination',
-              label: 'Pagination 分页'
-            }, {
-              value: 'badge',
-              label: 'Badge 标记'
-            }]
+            value: 'nianling',
+            label: '年龄'
           }, {
-            value: 'notice',
-            label: 'Notice',
-            children: [{
-              value: 'alert',
-              label: 'Alert 警告'
-            }, {
-              value: 'loading',
-              label: 'Loading 加载'
-            }, {
-              value: 'message',
-              label: 'Message 消息提示'
-            }, {
-              value: 'message-box',
-              label: 'MessageBox 弹框'
-            }, {
-              value: 'notification',
-              label: 'Notification 通知'
-            }]
+            value: 'shengao',
+            label: '身高'
           }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'menu',
-              label: 'NavMenu 导航菜单'
-            }, {
-              value: 'tabs',
-              label: 'Tabs 标签页'
-            }, {
-              value: 'breadcrumb',
-              label: 'Breadcrumb 面包屑'
-            }, {
-              value: 'dropdown',
-              label: 'Dropdown 下拉菜单'
-            }, {
-              value: 'steps',
-              label: 'Steps 步骤条'
-            }]
+            value: 'faxing',
+            label: '发型'
           }, {
-            value: 'others',
-            label: 'Others',
-            children: [{
-              value: 'dialog',
-              label: 'Dialog 对话框'
-            }, {
-              value: 'tooltip',
-              label: 'Tooltip 文字提示'
-            }, {
-              value: 'popover',
-              label: 'Popover 弹出框'
-            }, {
-              value: 'card',
-              label: 'Card 卡片'
-            }, {
-              value: 'carousel',
-              label: 'Carousel 走马灯'
-            }, {
-              value: 'collapse',
-              label: 'Collapse 折叠面板'
-            }]
+            value: 'titai',
+            label: '体态'
           }]
         }]
-      };
-    },
+      }, {
+        value: 'cheliang',
+        label: '车辆',
+        children: [{
+          value: 'jidongche',
+          label: '机动车',
+          children: [{
+            value: 'layout',
+            label: 'Layout 布局'
+          }, {
+            value: 'color',
+            label: 'Color 色彩'
+          }, {
+            value: 'typography',
+            label: 'Typography 字体'
+          }, {
+            value: 'icon',
+            label: 'Icon 图标'
+          }, {
+            value: 'button',
+            label: 'Button 按钮'
+          }]
+        }, {
+          value: 'feijidongche',
+          label: '非机动车',
+          children: [{
+            value: 'radio',
+            label: 'Radio 单选框'
+          }, {
+            value: 'checkbox',
+            label: 'Checkbox 多选框'
+          }, {
+            value: 'input',
+            label: 'Input 输入框'
+          }, {
+            value: 'input-number',
+            label: 'InputNumber 计数器'
+          }, {
+            value: 'select',
+            label: 'Select 选择器'
+          }, {
+            value: 'cascader',
+            label: 'Cascader 级联选择器'
+          }, {
+            value: 'switch',
+            label: 'Switch 开关'
+          }, {
+            value: 'slider',
+            label: 'Slider 滑块'
+          }, {
+            value: 'time-picker',
+            label: 'TimePicker 时间选择器'
+          }, {
+            value: 'date-picker',
+            label: 'DatePicker 日期选择器'
+          }, {
+            value: 'datetime-picker',
+            label: 'DateTimePicker 日期时间选择器'
+          }, {
+            value: 'upload',
+            label: 'Upload 上传'
+          }, {
+            value: 'rate',
+            label: 'Rate 评分'
+          }, {
+            value: 'form',
+            label: 'Form 表单'
+          }]
+        }, {
+          value: 'data',
+          label: 'Data',
+          children: [{
+            value: 'table',
+            label: 'Table 表格'
+          }, {
+            value: 'tag',
+            label: 'Tag 标签'
+          }, {
+            value: 'progress',
+            label: 'Progress 进度条'
+          }, {
+            value: 'tree',
+            label: 'Tree 树形控件'
+          }, {
+            value: 'pagination',
+            label: 'Pagination 分页'
+          }, {
+            value: 'badge',
+            label: 'Badge 标记'
+          }]
+        }, {
+          value: 'notice',
+          label: 'Notice',
+          children: [{
+            value: 'alert',
+            label: 'Alert 警告'
+          }, {
+            value: 'loading',
+            label: 'Loading 加载'
+          }, {
+            value: 'message',
+            label: 'Message 消息提示'
+          }, {
+            value: 'message-box',
+            label: 'MessageBox 弹框'
+          }, {
+            value: 'notification',
+            label: 'Notification 通知'
+          }]
+        }, {
+          value: 'navigation',
+          label: 'Navigation',
+          children: [{
+            value: 'menu',
+            label: 'NavMenu 导航菜单'
+          }, {
+            value: 'tabs',
+            label: 'Tabs 标签页'
+          }, {
+            value: 'breadcrumb',
+            label: 'Breadcrumb 面包屑'
+          }, {
+            value: 'dropdown',
+            label: 'Dropdown 下拉菜单'
+          }, {
+            value: 'steps',
+            label: 'Steps 步骤条'
+          }]
+        }, {
+          value: 'others',
+          label: 'Others',
+          children: [{
+            value: 'dialog',
+            label: 'Dialog 对话框'
+          }, {
+            value: 'tooltip',
+            label: 'Tooltip 文字提示'
+          }, {
+            value: 'popover',
+            label: 'Popover 弹出框'
+          }, {
+            value: 'card',
+            label: 'Card 卡片'
+          }, {
+            value: 'carousel',
+            label: 'Carousel 走马灯'
+          }, {
+            value: 'collapse',
+            label: 'Collapse 折叠面板'
+          }]
+        }]
+      }]
+    };
+  },
 
   created() {
     this.fetchData()
   },
   methods: {
 
-    // videoPlay() {
-    // this.$router.push('/VideoPlayer/index')
-    // },
-
-
-
-    //对话框
-    handleClose(done) {
-      this.$confirm('确认关闭？')
-        .then(_ => {
-          done();
-        })
-        .catch(_ => {});
+    videoPlay() {
+      this.$router.push('/technicalMethods_detial/index')
     },
-
 
     handleChange(value) {
       console.log(value);
@@ -584,4 +435,6 @@ export default {
 .pagination-container {
   background-color: transparent;
 }
+
+
 </style>

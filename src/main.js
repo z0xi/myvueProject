@@ -16,6 +16,11 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import * as filters from './filters' // global filters
 
+//视频播放
+import Video from 'video.js'
+import 'video.js/dist/video-js.css'
+
+
 
 
 /**
