@@ -40,6 +40,10 @@
 
 </template>
 <script>
+import universalTechnique_index from '@/views/TechnicalMethods/universalTechnique_detail/universalTechnique_index'
+import pinfanGuoren from '@/views/TechnicalMethods/universalTechnique_detail/components/pinfanGuoren'
+import shikongdanganGuolv from '@/views/TechnicalMethods/universalTechnique_detail/components/shikongdanganGuolv'
+
 export default {
   name: 'actualPopulation',
   data() {
@@ -97,8 +101,6 @@ export default {
 }
 </script>
 <style scoped>
-
-
 .bgColor{
   color:white;
 }

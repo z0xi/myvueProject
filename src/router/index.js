@@ -164,6 +164,12 @@ export const constantRoutes = [
         name: 'summary',
         component: () => import('@/views/document/summary/index'),
         meta: { title: '档案汇总', icon: 'el-icon-menu' }
+      },
+      {
+        path: 'search',
+        name: 'search',
+        component: () => import('@/views/document/search/index'),
+        meta: { title: '档案查找', icon: 'search' }
       }
     ]
   },
@@ -202,10 +208,6 @@ export const constantRoutes = [
       }
     ]
   },
-
-
-
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

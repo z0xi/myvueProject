@@ -22,9 +22,9 @@
       </div>
 </template>
 <script>
-import universalTechnique from '@/views/TechnicalMethods/components/universalTechnique';
-import actualPopulation from '@/views/TechnicalMethods/components/actualPopulation';
-import burGlary from '@/views/TechnicalMethods/components/burGlary';
+import universalTechnique from '@/views/TechnicalMethods/TechnicalMethods_detail/universalTechnique';
+import actualPopulation from '@/views/TechnicalMethods/TechnicalMethods_detail/actualPopulation';
+import burGlary from '@/views/TechnicalMethods/TechnicalMethods_detail/burGlary';
 export default {
   name: 'TechnicalMethods',
   components:{
