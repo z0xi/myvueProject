@@ -59,7 +59,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/didmanager',
     name: 'didmanager',
-    meta: { title: '视频DID身份管理', icon: 'el-icon-s-tools' },
+    meta: { title: 'DID身份管理', icon: 'el-icon-s-tools' },
     children: [
       {
         path: 'didlist',
@@ -112,30 +112,19 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/TechnicalMethods',
-    component: Layout,
-    children: [
-      {
-        path: 'TechnicalMethods',
-        component: () => import('@/views/TechnicalMethods/index'),
-        name: 'TechnicalMethods',
-        meta: { title: '技战法', icon: 'tree-table', noCache: true }
-      }
-    ]
-  },
+
   {
     path: '/VideoFunction',
     component: Layout,
     //redirect: '/example/table',
     name: 'Video Function',
-    meta: { title: '视频功能', icon: 'video-icon' },
+    meta: { title: '视频', icon: 'video-icon' },
     children: [
       {
         path: 'VideoInquire',
         name: 'VideoInquire',
         component: () => import('@/views/VideoFunction/VideoInquire/index'),
-        meta: { title: '视频浏览', icon: 'search' }
+        meta: { title: '视频查找', icon: 'search' }
       },
       {
         path: 'VideoAnalyze',
@@ -147,7 +136,7 @@ export const constantRoutes = [
         path: 'VideoPlay',
         name: 'VideoPlay',
         component: () => import('@/views/VideoFunction/VideoPlay/index'),
-        meta: { title: '视频播放', icon: 'eye-open' }
+        meta: { title: '视频浏览', icon: 'eye-open' }
       }
     ]
   },
@@ -193,30 +182,28 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/form',
+    path: '/taskManager',
     component: Layout,
+    redirect: '/taskManager',
+    name: 'task',
+    meta: { title: '任务', icon: 'form' },
     children: [
       {
         path: 'index',
         name: 'taskManager',
         component: () => import('@/views/taskmanager/index'),
         meta: { title: '任务管理', icon: 'form' }
-      }
-    ]
-  },
-
-
-  {
-    path: 'external-link',
-    hidden: true,
-    component: Layout,
-    children: [
+      },
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'TechnicalMethods',
+        component: () => import('@/views/TechnicalMethods/index'),
+        name: 'TechnicalMethods',
+        meta: { title: '技战法', icon: 'tree-table', noCache: true }
       }
     ]
   },
+
+
 
 
   // 404 page must be placed at the end !!!
