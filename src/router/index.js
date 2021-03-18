@@ -194,17 +194,17 @@ export const constantRoutes = [
   },
   {
     path: '/form',
-    hidden: true,
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        name: 'taskManager',
+        component: () => import('@/views/taskmanager/index'),
+        meta: { title: '任务管理', icon: 'form' }
       }
     ]
   },
+
 
   {
     path: 'external-link',
@@ -217,6 +217,7 @@ export const constantRoutes = [
       }
     ]
   },
+
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
