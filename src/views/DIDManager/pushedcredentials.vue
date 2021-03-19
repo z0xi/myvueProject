@@ -96,7 +96,7 @@
 
 <script>
 import waves from '@/directive/waves' // waves directive
-import { getList } from '@/api/table'
+import { getList } from '@/api/did'
 
 export default {
   name: 'pushcredentials',

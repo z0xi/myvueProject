@@ -6,7 +6,10 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    role:'',
+    email:'',
+    phone:''
   }
 }
 
@@ -24,6 +27,15 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_EMAIL: (state, email) => {
+    state.email = email
+  },
+  SET_PHONE: (state, phone) => {
+    state.phone = phone
+  },
+  SET_ROLE: (state, role) => {
+    state.role = role
   }
 }
 
@@ -49,20 +61,17 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-        // const  data  = {
-        //   roles: ['admin'],
-        //   introduction: 'I am a super administrator',
-        //   avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        //   name: 'Super Admin'
-        // }
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
+         console.log(data)
+        const { avatar, nickname, email, phone, role} = data
 
-        const { name, avatar } = data
-
-        commit('SET_NAME', name)
+        commit('SET_NAME', nickname)
         commit('SET_AVATAR', avatar)
+        commit('SET_EMAIL', email)
+        commit('SET_PHONE', phone)
+        commit('SET_ROLE', role)
         resolve(data)
       }).catch(error => {
         reject(error)

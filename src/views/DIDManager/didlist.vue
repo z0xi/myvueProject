@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getList } from '@/api/did'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination'
 import picture from '@/assets/bg.png' // secondary package based on el-pagination

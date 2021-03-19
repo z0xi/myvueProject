@@ -112,19 +112,18 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: '/VideoFunction',
     component: Layout,
     //redirect: '/example/table',
     name: 'Video Function',
-    meta: { title: '视频', icon: 'video-icon' },
+    meta: { title: '视频功能', icon: 'video-icon' },
     children: [
       {
         path: 'VideoInquire',
         name: 'VideoInquire',
         component: () => import('@/views/VideoFunction/VideoInquire/index'),
-        meta: { title: '视频查找', icon: 'search' }
+        meta: { title: '视频浏览', icon: 'search' }
       },
       {
         path: 'VideoAnalyze',
@@ -136,7 +135,7 @@ export const constantRoutes = [
         path: 'VideoPlay',
         name: 'VideoPlay',
         component: () => import('@/views/VideoFunction/VideoPlay/index'),
-        meta: { title: '视频浏览', icon: 'eye-open' }
+        meta: { title: '视频播放', icon: 'eye-open' }
       }
     ]
   },
@@ -183,7 +182,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+        meta: { title: '个人资料', icon: 'user', noCache: true }
       }
     ]
   },
@@ -191,14 +190,20 @@ export const constantRoutes = [
     path: '/taskManager',
     component: Layout,
     redirect: '/taskManager',
-    name: 'task',
-    meta: { title: '任务', icon: 'form' },
+    meta: { title: '任务管理', icon: 'form', noCache: true },
     children: [
       {
         path: 'index',
+        component: () => import('@/views/taskManager/index'),
         name: 'taskManager',
-        component: () => import('@/views/taskmanager/index'),
-        meta: { title: '任务管理', icon: 'form' }
+        meta: { title: '任务管理', icon: 'el-icon-s-tools', noCache: true }
+      },
+      {
+        path: 'taskcreate',
+        hiden:true,
+        component: () => import('@/views/taskManager/taskCreate/index'),
+        name: 'taskCreate',
+        meta: { title: '任务创建', icon: 'el-icon-s-tools', noCache: true }
       },
       {
         path: 'TechnicalMethods',
@@ -208,6 +213,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

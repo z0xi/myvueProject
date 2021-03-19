@@ -5,22 +5,21 @@
     </div>
     <div style="position:relative;">
       <pan-thumb :image="avatar" class="panThumb" />
-      <mallki class-name="mallki-text" text="系统用户 admin" />
       <div style="padding-top:35px;" class="progress-item">
-        <span>任务分析</span>
-        <el-progress :percentage="70" />
+        <span>姓名：</span>
+        <span>{{ name }}</span>
       </div>
       <div class="progress-item">
-        <span>视频提交</span>
-        <el-progress :percentage="18" />
+        <span>邮箱：</span>
+        <span>{{ email }}</span>
       </div>
       <div class="progress-item">
-        <span>设备运行</span>
-        <el-progress :percentage="12" />
+        <span>电话：</span>
+        <span>{{ phone }}</span>
       </div>
       <div class="progress-item">
-        <span>任务二分析</span>
-        <el-progress :percentage="100" status="success" />
+        <span>权限：</span>
+        <span>{{ role }}</span>
       </div>
     </div>
   </el-card>
@@ -55,7 +54,9 @@ export default {
     ...mapGetters([
       'name',
       'avatar',
-      'roles'
+      'role',
+      'email',
+      'phone'
     ])
   }
 }

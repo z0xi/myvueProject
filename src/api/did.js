@@ -2,8 +2,8 @@ import request from '@/utils/request'
 
 export function getList(params) {
   return request({
-    url: '/vue-admin-template/table/list',
-    method: 'get',
+    url: '/page3/step1/getIssuerList',
+    method: 'POST',
     params
   })
 }

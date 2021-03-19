@@ -6,7 +6,6 @@
         <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
           <box-card />
         </el-col>
-
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
@@ -49,7 +48,8 @@ export default {
     ...mapGetters([
       'name',
       'avatar',
-      'roles'
+      'role',
+      'email',
     ])
   },
   created() {
@@ -59,8 +59,8 @@ export default {
     getUser() {
       this.user = {
         name: this.name,
-        role: this.roles.join(' | '),
-        email: 'admin@test.com',
+        role: this.role,
+        email: this.email,
         avatar: this.avatar
       }
       },

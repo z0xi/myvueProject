@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+import VueAxios from 'vue-axios'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
@@ -44,7 +45,7 @@ Vue.use(ElementUI, { locale })
 
 
 Vue.prototype.$axios = axios
-
+Vue.use(VueAxios, axios);
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
