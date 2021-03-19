@@ -24,15 +24,15 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="DID" width="300" align="center">
+      <el-table-column label="DID" align="center">
         <template slot-scope="scope">
-          {{ scope.row.did }}
+          {{ scope.row.issuer }}
         </template>
       </el-table-column>
       <
       <el-table-column label="Authority属性" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.deviceposition }}</span>
+          <span>{{ scope.row.orgId }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="280" class-name="small-padding fixed-width">
@@ -66,8 +66,9 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
-
+import { getList } from '@/api/did'
+import axios from 'axios'
+import qs from 'qs'
 export default {
   name: 'didregister'
   ,
@@ -95,18 +96,31 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
-        this.listLoading = false
-      })
+      // getList(this.listQuery).then(response => {
+      //   this.list = response.data.items
+      //   this.total = response.data.total
+      //   this.listLoading = false
+      // })
+      let that = this
+      this.axios({
+        method: 'post',
+        url:'http://120.79.7.126:6101/page3/step1/getIssuerList',
+        params:{
+          size:this.listQuery.limit,
+          start:this.listQuery.page
+        }
+      }).then(function(response){
+        console.log(response.data.result.dataList)
+        that.list = response.data.result.dataList
+        that.listLoading = false
+      });
     },
     handleDownload() {
       this.downloadLoading = true
       console.log(this.list)
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['id', 'did', 'district']
-        const filterVal = ['id', 'title', 'devicedistrict']
+        const tHeader = ['id', 'did', 'orgId']
+        const filterVal = ['id', 'issuer', 'orgId']
         const data = this.formatJson(filterVal)
         excel.export_json_to_excel({
           header: tHeader,
