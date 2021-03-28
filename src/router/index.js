@@ -65,7 +65,7 @@ export const constantRoutes = [
         path: 'didlist',
         name: 'Didlist',
         component: () => import('@/views/DIDManager/didlist'),
-        meta: { title: '摄像头接入认证', icon: 'el-icon-caret-right' }
+        meta: { title: '已入网摄像头', icon: 'el-icon-caret-right' }
       },
       {
         path: 'didcreate',
@@ -77,25 +77,32 @@ export const constantRoutes = [
         path: 'applyclaim',
         name: 'applyclaim',
         component: () => import('@/views/DIDManager/applyclaim'),
-        meta: { title: '待审核claim', icon: 'el-icon-caret-right' }
+        meta: { title: '摄像头入网申请', icon: 'el-icon-caret-right' }
       },
       {
         path: 'pushedcredentials',
         name: 'pushedcredentials',
         component: () => import('@/views/DIDManager/pushedcredentials'),
-        meta: { title: '已发布credentials列表', icon: 'el-icon-caret-right' }
+        meta: { title: '摄像头入网证书', icon: 'el-icon-caret-right' }
       },
       {
         path: 'personauth',
+        hidden:true,
         name: 'personauth',
         component: () => import('@/views/DIDManager/personauth'),
         meta: { title: '个人配置', icon: 'el-icon-caret-right' }
       },
       {
+        path: 'CRTManage',
+        name: 'CRTManage',
+        component: () => import('@/views/DIDManager/CRTManage'),
+        meta: { title: 'CRT模板管理', icon: 'el-icon-caret-right' }
+      },
+      {
         path: 'didman',
         name: 'didman',
         component: () => import('@/views/DIDManager/didman'),
-        meta: { title: 'DID管理（管理员）', icon: 'el-icon-caret-right' }
+        meta: { title: '系统DID管理', icon: 'el-icon-caret-right' }
       }
     ]
   },
