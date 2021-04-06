@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '主页', icon: 'dashboard' }
+      meta: { title: '主页', icon: 'host_icon', icon1: require('../assets/nav_icon/host_icon_up.png') }
     }]
   },
   {
@@ -59,7 +59,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/didmanager',
     name: 'didmanager',
-    meta: { title: 'DID身份管理', icon: 'el-icon-s-tools' },
+    meta: { title: 'DID身份管理', icon: 'didmanager_icon' },
     children: [
       {
         path: 'didlist',
@@ -87,17 +87,17 @@ export const constantRoutes = [
       },
       {
         path: 'personauth',
-        hidden:true,
+        hidden: true,
         name: 'personauth',
         component: () => import('@/views/DIDManager/personauth'),
         meta: { title: '个人配置', icon: 'el-icon-caret-right' }
       },
-      {
-        path: 'CRTManage',
-        name: 'CRTManage',
-        component: () => import('@/views/DIDManager/CRTManage'),
-        meta: { title: 'CRT模板管理', icon: 'el-icon-caret-right' }
-      },
+      // {
+      //   path: 'CRTManage',
+      //   name: 'CRTManage',
+      //   component: () => import('@/views/DIDManager/CRTManage'),
+      //   meta: { title: 'CRT模板管理', icon: 'el-icon-caret-right' }
+      // },
       {
         path: 'didman',
         name: 'didman',
@@ -122,9 +122,9 @@ export const constantRoutes = [
   {
     path: '/VideoFunction',
     component: Layout,
-    //redirect: '/example/table',
+    redirect: '/VideoInquire',
     name: 'Video Function',
-    meta: { title: '视频功能', icon: 'video-icon' },
+    meta: { title: '视频功能', icon: 'VideoFunction_icon' },
     children: [
       {
         path: 'VideoInquire',
@@ -151,7 +151,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/document',
     name: 'document',
-    meta: { title: '一人一档', icon: 'el-icon-document' },
+    meta: { title: '一人一档', icon: 'document_icon' },
     children: [
       {
         path: 'index',
@@ -197,7 +197,7 @@ export const constantRoutes = [
     path: '/taskManager',
     component: Layout,
     redirect: '/taskManager',
-    meta: { title: '任务管理', icon: 'form', noCache: true },
+    meta: { title: '任务管理', icon: 'taskManager_icon', noCache: true },
     children: [
       {
         path: 'index',
@@ -207,7 +207,7 @@ export const constantRoutes = [
       },
       {
         path: 'taskcreate',
-        hiden:true,
+        hiden: true,
         component: () => import('@/views/taskManager/taskCreate/index'),
         name: 'taskCreate',
         meta: { title: '任务创建', icon: 'el-icon-s-tools', noCache: true }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div :class="className" class="LineChart" :style="{height:height,width:width}" />
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '400px'
     },
     autoResize: {
       type: Boolean,
@@ -70,11 +70,20 @@ export default {
             show: false
           }
         },
+        legend: {
+          right: '15',
+          top: '5',
+          data: ['在线', '离线'],
+          textStyle: {
+            fontSize: 12,
+            color: '#8098BE'
+          }
+        },
         grid: {
           left: 10,
-          right: 10,
+          right: 15,
           bottom: 10,
-          top: 20,
+          top: 30,
           containLabel: true
         },
         tooltip: {
@@ -87,49 +96,93 @@ export default {
         yAxis: {
           axisTick: {
             show: false
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: ['#203255'],
+              width: 1,
+              type: 'solid'
+            }
+          },
+          splitArea: {
+            show: false
           }
         },
-        legend: {
-          data: ['expected', 'actual']
-        },
         series: [{
-          name: 'expected', itemStyle: {
+          name: '在线',
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [{
+                offset: 0, color: 'rgba(43, 18, 255, .3)' // 0% 处的颜色
+              }, {
+                offset: 1, color: 'rgba(43, 158, 255, 0)' // 100% 处的颜色
+              }],
+              global: false // 缺省为 false
+            }
+          },
+          itemStyle: {
             normal: {
-              color: '#FF005A',
+              color: '#2B9EFF',
               lineStyle: {
-                color: '#FF005A',
-                width: 2
+                color: '#2B9EFF',
+                width: 3
               }
             }
           },
-          smooth: true,
+          smooth: 'none',
           type: 'line',
           data: expectedData,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
-          {
-            name: 'actual',
-            smooth: true,
-            type: 'line',
-            itemStyle: {
-              normal: {
-                color: '#3888fa',
-                lineStyle: {
-                  color: '#3888fa',
-                  width: 2
-                },
-                areaStyle: {
-                  color: '#f3f8ff'
-                }
+        {
+          name: '离线',
+          smooth: 'none',
+          type: 'line',
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [{
+                offset: 0, color: 'rgba(194, 106, 72, .3)' // 0% 处的颜色
+              }, {
+                offset: 1, color: 'rgba(194, 106, 72, 0)' // 100% 处的颜色
+              }],
+              global: false // 缺省为 false
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: '#C26A48',
+              lineStyle: {
+                color: '#C26A48',
+                width: 3
               }
-            },
-            data: actualData,
-            animationDuration: 2800,
-            animationEasing: 'quadraticOut'
-          }]
+            }
+          },
+          data: actualData,
+          animationDuration: 2800,
+          animationEasing: 'quadraticOut'
+        }]
       })
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.LineChart {
+  margin-top: 10px;
+  background: rgba(14, 34, 69, 0.8);
+  border-radius: 6px;
+}
+</style>
+

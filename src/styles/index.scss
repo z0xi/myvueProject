@@ -3,6 +3,7 @@
 @import './transition.scss';
 @import './element-ui.scss';
 @import './sidebar.scss';
+@import './layout.scss';
 
 body {
   height: 100%;
@@ -11,7 +12,18 @@ body {
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
-
+.bj1{
+  background: red !important;
+}
+.bj2{
+  background: pink !important;
+}
+.bj3{
+  background: yellow !important;
+}
+.bj4{
+  background: #0088cc !important;
+}
 label {
   font-weight: 700;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar bj3">
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
     <breadcrumb class="breadcrumb-container" />

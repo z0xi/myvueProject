@@ -1,93 +1,113 @@
 <template>
-  <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar class="sidebar-container" />
-    <div class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
+  <div class="layout_index">
+    <div class="header">
+      <div class="header_left">
+        <div class="header_title">平台名称</div>
+        <div class="header_hr" />
+        <div class="header_el-dropdown_switch">
+          <img :src="switchIcon" alt="" class="switch_icon" @click="switchIconNav">
+        </div>
       </div>
-      <app-main />
+      <div class="header_right">
+        <el-dropdown class="admin_user">
+          <span class="el-dropdown-link">
+            <img src="../assets/icon/user_icon.png" alt="" class="user_img">
+            {{ username }}<i class="el-icon-caret-bottom el-icon--right" />
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>修改信息</el-dropdown-item>
+            <el-dropdown-item>修改密码</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <div class="user_number">
+          <img src="../assets/icon/browse_icon.png" alt="" class="user_img">
+          用户浏览数：
+          <span>102400</span>
+        </div>
+      </div>
+    </div>
+    <div class="main" :class="switchMain">
+      <div class="nav_left">
+        <el-scrollbar style="height:100%">
+          <el-menu
+            :default-active="defaultActive"
+            class="nav_el_menu el-menu-vertical-demo"
+            :collapse="isCollapse"
+            :unique-opened="true"
+            background-color="#020C1C"
+            text-color="#8098BE"
+            active-text-color="#2B9EFF"
+            :router="true"
+          >
+            <template v-for="menu in routes">
+              <el-menu-item v-if="menu.meta === undefined&&!menu.hidden" :key="menu.path" :index="Path(menu.path)">
+                <i :class="menu.children[0].meta.icon" class="menu_img_icon" />
+                <span slot="title" class="menu_title">{{ menu.children[0].meta.title }}</span>
+              </el-menu-item>
+              <el-submenu v-else-if="!menu.hidden" :key="menu.path" :index="menu.path">
+                <template slot="title">
+                  <i :class="menu.meta.icon" class="menu_img_icon" />
+                  <span slot="title" class="menu_title">{{ menu.meta.title }}</span>
+                </template>
+                <el-menu-item v-for="son in menu.children" :key="son.path" :index="childPath(menu.path, son.path)">{{ son.meta.title }}</el-menu-item>
+              </el-submenu>
+            </template>
+          </el-menu>
+        </el-scrollbar>
+      </div>
+      <div class="app_main">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
-import ResizeMixin from './mixin/ResizeHandler'
-
 export default {
   name: 'Layout',
-  components: {
-    Navbar,
-    Sidebar,
-    AppMain
+  data() {
+    return {
+      username: 'admin',
+      switchMain: 'openNav',
+      switchIcon: require('../assets/icon/switchIcon_down.png'),
+      defaultActive: this.$route.path,
+      isCollapse: false
+    }
   },
-  mixins: [ResizeMixin],
   computed: {
-    sidebar() {
-      return this.$store.state.app.sidebar
-    },
-    device() {
-      return this.$store.state.app.device
-    },
-    fixedHeader() {
-      return this.$store.state.settings.fixedHeader
-    },
-    classObj() {
-      return {
-        hideSidebar: !this.sidebar.opened,
-        openSidebar: this.sidebar.opened,
-        withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile'
-      }
+    routes() {
+      console.log('this.$router.options.routes1:', this.$router.options.routes)
+      return this.$router.options.routes
+    }
+  },
+  watch: {
+    '$route'(to, from) {
+      this.defaultActive = to.path
     }
   },
   methods: {
-    handleClickOutside() {
-      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+    Path(e) {
+      if (e === '/') {
+        return '/Dashboard'
+      } else {
+        return e
+      }
+    },
+    childPath(path, path1) {
+      return `${path}/${path1}`
+    },
+    switchIconNav() {
+      if (this.isCollapse) {
+        this.isCollapse = false
+        this.switchMain = 'openNav'
+        this.switchIcon = require('../assets/icon/switchIcon_down.png')
+      } else {
+        this.isCollapse = true
+        this.switchMain = 'hideNav'
+        this.switchIcon = require('../assets/icon/switchIcon_up.png')
+      }
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-  @import "~@/styles/mixin.scss";
-  @import "~@/styles/variables.scss";
-
-  .app-wrapper {
-    @include clearfix;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    &.mobile.openSidebar{
-      position: fixed;
-      top: 0;
-    }
-  }
-  .drawer-bg {
-    background: #000;
-    opacity: 0.3;
-    width: 100%;
-    top: 0;
-    height: 100%;
-    position: absolute;
-    z-index: 999;
-  }
-
-  .fixed-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
-    transition: width 0.28s;
-  }
-
-  .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
-  }
-
-  .mobile .fixed-header {
-    width: 100%;
-  }
-</style>

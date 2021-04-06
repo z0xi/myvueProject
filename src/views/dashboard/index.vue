@@ -9,7 +9,7 @@ import adminDashboard from './admin'
 
 export default {
   name: 'Dashboard',
-  components: { adminDashboard},
+  components: { adminDashboard },
   data() {
     return {
       currentRole: 'adminDashboard'
@@ -18,4 +18,7 @@ export default {
 }
 </script>
 <style scoped>
+.dashboard-container{
+  height: 100%;
+}
 </style>

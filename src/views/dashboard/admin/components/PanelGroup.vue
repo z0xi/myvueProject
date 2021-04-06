@@ -1,54 +1,15 @@
 <template>
   <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-watching">
-          <svg-icon icon-class="watching-icon" class-name="card-panel-icon" />
+    <el-col v-for="item in panelGroupData" :key="item.handleSetLine" :xs="12" :sm="12" :lg="8" class="card-panel-col">
+      <div class="card-panel" :class="item.cardPanel" @click="handleSetLineChartData(item)">
+        <div class="card-panel-left">
+          <img :src="item.cardPanelImg">
         </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            用户浏览数
-          </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-video">
-          <svg-icon icon-class="video-icon" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            视频数
-          </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('purchases')">
-        <div class="card-panel-icon-wrapper icon-camera">
-          <svg-icon icon-class="camera-icon" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            设备数
-          </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('shoppings')">
-        <div class="card-panel-icon-wrapper icon-man">
-          <svg-icon icon-class="man-icon" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            查出嫌疑人数
-          </div>
+        <div class="card-panel-right">
           <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <div class="card-panel-text">
+            {{ item.title }}
+          </div>
         </div>
       </div>
     </el-col>
@@ -57,14 +18,41 @@
 
 <script>
 import CountTo from 'vue-count-to'
-
 export default {
   components: {
     CountTo
   },
+  data() {
+    return {
+      panelGroupData: [
+        {
+          title: '视频数',
+          cardPanelImg: require('../../../../assets/icon/Panel_vidio.png'),
+          handleSetLine: 'messages',
+          cardPanel: 'card_panel_bj_on'
+        },
+        {
+          title: '设备数',
+          cardPanelImg: require('../../../../assets/icon/Panel_camera.png'),
+          handleSetLine: 'purchases',
+          cardPanel: 'card_panel_bj'
+        },
+        {
+          title: '查出嫌疑人数',
+          cardPanelImg: require('../../../../assets/icon/Panel_suspect.png'),
+          handleSetLine: 'shoppings',
+          cardPanel: 'card_panel_bj'
+        }
+      ]
+    }
+  },
   methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
+    handleSetLineChartData(e) {
+      this.$emit('handleSetLineChartData', e.handleSetLine)
+      this.panelGroupData.map((v, i) => {
+        v.cardPanel = 'card_panel_bj'
+      })
+      e.cardPanel = 'card_panel_bj_on'
     }
   }
 }
@@ -72,92 +60,45 @@ export default {
 
 <style lang="scss" scoped>
 .panel-group {
-  //margin-top: 1px;
-
-  .card-panel-col {
-    margin-bottom: 1px;
-  }
-
-  .card-panel {
-    height: 108px;
-    cursor: pointer;
-    font-size: 12px;
-    position: relative;
-    overflow: hidden;
-    color: #fff;
-    //background: #fff;
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
-    border-color: rgba(0, 0, 0, .05);
-
-    &:hover {
-      .card-panel-icon-wrapper {
-        color: #fff;
+  margin-top: 30px;
+  .card-panel{
+    width: 292px;
+    height: 84px;
+    margin: auto;
+    display: flex;
+    .card-panel-left, .card-panel-right{
+      flex: 1;
+      position: relative;
+      img{
+        width: 56px;
+        height: 50px;
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        margin-top: -25px;
       }
-
-      .icon-watching {
-        background: #40c9c6;
-      }
-
-      .icon-video {
-        background: #36a3f7;
-      }
-
-      .icon-camera {
-        background: #f4516c;
-      }
-
-      .icon-man {
-        background: #34bfa3
-      }
-    }
-
-    .icon-watching {
-      color: #40c9c6;
-    }
-
-    .icon-video {
-      color: #36a3f7;
-    }
-
-    .icon-camera {
-      color: #f4516c;
-    }
-
-    .icon-man {
-      color: #34bfa3
-    }
-
-    .card-panel-icon-wrapper {
-      float: left;
-      margin: 14px 0 0 14px;
-      padding: 16px;
-      transition: all 0.38s ease-out;
-      border-radius: 6px;
-    }
-
-    .card-panel-icon {
-      float: left;
-      font-size: 48px;
-    }
-
-    .card-panel-description {
-      float: right;
-      font-weight: bold;
-      margin: 26px;
-      margin-left: 0px;
-
-      .card-panel-text {
-        line-height: 18px;
-        color: rgba(200, 200, 200, 0.45);
-        font-size: 16px;
-        margin-bottom: 12px;
-        color: #fff;
-      }
-
-      .card-panel-num {
+      .card-panel-text{
+        height: 50%;
         font-size: 20px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: #8098BE;
+      }
+      .card-panel-num{
+        font-size: 32px;
+        font-family: Arial;
+        font-weight: bold;
+        color: #C8D9F6;
+        display: block;
+        margin-top: 7px;
       }
     }
+  }
+  .card_panel_bj{
+    background: url(../../../../assets/icon/Focus_box.png) 100% 100% no-repeat;
+  }
+  .card_panel_bj_on{
+    background: url(../../../../assets/icon/Focus_box_on.png) 100% 100% no-repeat;
   }
 }
 
