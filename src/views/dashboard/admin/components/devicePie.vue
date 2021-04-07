@@ -50,21 +50,34 @@ export default {
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['未入网设备', '已入网设备', '待修理设备']
+          right: '2',
+          top: '2',
+          itemHeight:'4',
+          borderRadius:4,
+          data: ['已完成', '进行中'],
+          textStyle:{
+          	color:'rgb(128,152,190)'
+          }
         },
         series: [
           {
-            name: '摄像头情况',
+            name: '任务数',
             type: 'pie',
-            roseType: 'radius',
-            radius: [15, 95],
-            center: ['50%', '38%'],
+            radius: [65, 95],
+            center: ['50%', '50%'],
+            itemStyle: {
+	            borderColor: 'rgba(14, 34, 69, 0.8)',
+	            borderWidth: 2
+            },
+            label: {
+	            formatter: '{b} : {c}',
+	            textStyle:{
+	            	color:'rgb(179, 195, 224)'
+	            }
+            },
             data: [
-              { value: 320, name: '未入网设备' },
-              { value: 240, name: '已入网设备' },
-              { value: 149, name: '待修理设备' }
+              { value: 4, name: '已完成',itemStyle:{color:"rgb(50, 171, 118)"} },
+              { value: 1, name: '进行中',itemStyle:{color:"rgb(44, 158, 255)"} },
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600

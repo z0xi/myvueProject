@@ -7,11 +7,19 @@
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
+        	<div class="chart-title">任务数</div>
           <devicePie />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
+        	<div class="chart-title">资源情况</div>
+          <taskBar />
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+        	<div class="chart-title">抓拍及档案</div>
           <taskBar />
         </div>
       </el-col>
@@ -66,6 +74,20 @@ export default {
     .chart-wrapper {
       padding: 8px 8px 0;
       margin-bottom: 8px;
+      border-radius: 6px;
+      background: url(../../../assets/icon/chart_bg1.png) no-repeat center center;
+      background-color: rgba(14, 34, 69, 0.8);
+      position: relative;
+      .chart-title{
+	    	color: rgb(128,152,190);
+	    	background: url(../../../assets/icon/title_icon.png) no-repeat left center;
+	    	background-size: 29px 16px;
+	    	padding-left: 34px;
+	    	font-weight: 700;
+	    	position: absolute;
+	    	top: 10px;
+	    	left: 10px;
+	    }
     }
 }
 </style>
