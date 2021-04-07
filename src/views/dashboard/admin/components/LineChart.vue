@@ -119,7 +119,7 @@ export default {
               x2: 0,
               y2: 1,
               colorStops: [{
-                offset: 0, color: 'rgba(43, 18, 255, .3)' // 0% 处的颜色
+                offset: 0, color: 'rgba(43, 18, 255, .1)' // 0% 处的颜色
               }, {
                 offset: 1, color: 'rgba(43, 158, 255, 0)' // 100% 处的颜色
               }],
@@ -153,7 +153,7 @@ export default {
               x2: 0,
               y2: 1,
               colorStops: [{
-                offset: 0, color: 'rgba(194, 106, 72, .3)' // 0% 处的颜色
+                offset: 0, color: 'rgba(194, 106, 72, .1)' // 0% 处的颜色
               }, {
                 offset: 1, color: 'rgba(194, 106, 72, 0)' // 100% 处的颜色
               }],
@@ -183,6 +183,7 @@ export default {
   margin-top: 10px;
   background: rgba(14, 34, 69, 0.8);
   border-radius: 6px;
+  padding: 25px;
 }
 </style>
 
