@@ -67,8 +67,20 @@ export default {
           data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
           boundaryGap: false,
           axisTick: {
-            show: false
-          }
+            show: true,
+            lineStyle:{
+              color:'rgb(81,108,153)'
+            }
+          },
+          splitLine: {show: false},
+          axisLabel:{
+            color:'rgb(128,152,190)'
+          },
+          axisLine: {
+            lineStyle: {
+              color:'rgb(32,51,84)' , //左边线的颜色
+            }
+          },
         },
         legend: {
           right: '15',
@@ -76,14 +88,16 @@ export default {
           data: ['在线', '离线'],
           textStyle: {
             fontSize: 12,
-            color: '#8098BE'
-          }
+            color: 'rgb(128,152,190)'
+          },
+          itemHeight:8, //圆点大小
+          itemWidth:20, // 线的长度
         },
         grid: {
           left: 10,
-          right: 15,
+          right: 30,
           bottom: 10,
-          top: 30,
+          top: 40,
           containLabel: true
         },
         tooltip: {
@@ -91,7 +105,8 @@ export default {
           axisPointer: {
             type: 'cross'
           },
-          padding: [5, 10]
+          padding: [5, 10],
+          backgroundColor:'rgba(0,0,0,0.7)'
         },
         yAxis: {
           axisTick: {
@@ -107,10 +122,17 @@ export default {
           },
           splitArea: {
             show: false
-          }
+          },
+          axisLabel:{
+            color:'rgb(128,152,190)'
+          },
+          axisLine: {
+            show:false
+          },
         },
         series: [{
           name: '在线',
+          symbol:'circle',
           areaStyle: {
             color: {
               type: 'linear',
@@ -119,9 +141,9 @@ export default {
               x2: 0,
               y2: 1,
               colorStops: [{
-                offset: 0, color: 'rgba(43, 18, 255, .3)' // 0% 处的颜色
+                offset: 0, color: 'rgba(61,149,255, .1)' // 0% 处的颜色
               }, {
-                offset: 1, color: 'rgba(43, 158, 255, 0)' // 100% 处的颜色
+                offset: 1, color: 'rgba(61,149,255, 0)' // 100% 处的颜色
               }],
               global: false // 缺省为 false
             }
@@ -143,6 +165,7 @@ export default {
         },
         {
           name: '离线',
+          symbol:'circle',
           smooth: 'none',
           type: 'line',
           areaStyle: {
@@ -153,9 +176,9 @@ export default {
               x2: 0,
               y2: 1,
               colorStops: [{
-                offset: 0, color: 'rgba(194, 106, 72, .3)' // 0% 处的颜色
+                offset: 0, color: 'rgba(226,119,67, .1)' // 0% 处的颜色
               }, {
-                offset: 1, color: 'rgba(194, 106, 72, 0)' // 100% 处的颜色
+                offset: 1, color: 'rgba(226,119,67, 0)' // 100% 处的颜色
               }],
               global: false // 缺省为 false
             }
@@ -179,10 +202,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.LineChart {
-  margin-top: 10px;
-  background: rgba(14, 34, 69, 0.8);
-  border-radius: 6px;
-}
-</style>
 
+</style>
