@@ -1,69 +1,76 @@
 <template>
-  <div class="app-container">
+  <div class="didlist-container">
+    <div class="didlist_title">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item>DID身份管理</el-breadcrumb-item>
+        <el-breadcrumb-item><span style="color:#8198BE;">摄像头入网申请</span></el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <div class="filter-container">
-      <el-input v-model="listQuery.title" placeholder="申请方DID" style="width: 200px;" class="filter-item"
-                @keyup.enter.native="handleFilter"
-      />
-      <el-button v-waves class="filter-item"  style="margin-left:12px" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-input v-model="listQuery.title" placeholder="申请方DID" class="filter-item filter_iput" @keyup.enter.native="handleFilter" />
+      <el-button v-waves class="filter-item filter_button" style="margin-left:12px" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
+      <el-button v-waves :loading="downloadLoading" style="margin-left:12px" class="filter-item filter_button" type="primary" icon="el-icon-download" @click="handleDownload">
+        导出
+      </el-button>
     </div>
+    <div class="dev_table">
+      <el-scrollbar ref="elscrollbar">
+        <el-table
+          v-loading="listLoading"
+          :data="list"
+          stripe
+          fit
+        >
+          <el-table-column align="center" label="序号" width="95">
+            <template slot-scope="scope">
+              {{ scope.$index }}
+            </template>
+          </el-table-column>
+          <el-table-column label="申请内容" align="center">
+            <template slot-scope="scope">
+              <el-button type="text" class="DID_button" @click="credentialVisible = true">{{ scope.row.did }}</el-button>
+            </template>
+          </el-table-column>
+          <el-table-column label="申请者DID" align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.devicedistrict }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="created_at" label="DID 创建时间">
+            <template slot-scope="scope">
+              <i class="el-icon-time" />
+              <span>{{ scope.row.display_time }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" align="center" width="280" class-name="small-padding fixed-width">
+            <template slot-scope="{row,$index}">
+              <el-button v-if="row.status!='created'" class="pass_button" size="mini" @click="handleapply(row,$index)">
+                通过
+              </el-button>
+              <el-button v-if="row.status!='freshing'" class="refuse_button" size="mini" @click="handleDelete(row,$index)">
+                拒绝
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-scrollbar>
+      <el-pagination
+        class="sa-page"
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 30, 50]"
+        :page-size="pageSize" layout="prev, pager, next, sizes, jumper"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange">
+      </el-pagination>
+    </div>
+    
+    <!-- <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
+                @pagination="fetchData"
+    /> -->
 
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-      style="margin-top:18px"
-    >
-      <el-table-column align="center" label="序号" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="申请内容"  align="center" >
-        <template slot-scope="scope" >
-          <el-button type="text" @click="credentialVisible = true">{{ scope.row.deviceposition }}</el-button>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="申请者DID" width="200" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.did }}
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="DID
-      创建时间" width="200"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-time"/>
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" align="center" width="280" class-name="small-padding fixed-width">
-        <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            通过
-          </el-button>
-          <el-button v-if="row.status!='freshing'" size="mini" type="danger" @click="handleDelete(row,$index)">
-            拒绝
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <el-dialog
-      title="credential内容"
-      :visible.sync="credentialVisible"
-      width="30%">
-      <span>{{credentialcontent}}}</span>
-      <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="credentialVisible = false">确 定</el-button>
-  </span>
-
-    </el-dialog>
     <el-dialog title="修改该摄像头信息" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="100px"
                style="width: 400px; margin-left:50px;"
@@ -76,24 +83,29 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          取消
-        </el-button>
-        <el-button type="primary" @click="updateData()">
+        <el-button @click="updateData()">
           确定
         </el-button>
       </div>
     </el-dialog>
 
+    <el-dialog
+      title="申请详细信息"
+      :visible.sync="credentialVisible"
+      >
+      <span>{{credentialcontent}}}</span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import waves from '@/directive/waves' // waves directive
 import { getList } from '@/api/did'
-
+import waves from '@/directive/waves' // waves directive
+import Pagination from '@/components/Pagination'
+// import picture from '@/assets/bg.png' // secondary package based on el-pagination
 export default {
-  name: 'applyclaim',
+  name: 'didlist',
+  components: { Pagination },
   directives: { waves },
   filters: {
     statusFilter(status) {
@@ -107,32 +119,130 @@ export default {
   },
   data() {
     return {
-      list: null,
-      listLoading: true,
-      total: 0,
-      temp:{
-      },
-      dialogFormVisible: false,
-      credentialVisible:false,
-      downloadLoading: false,
-      credentialcontent:"{{json内容}}",
+      list: [
+        {
+          did: 'Vprmmuv',
+          devicedistrict: 'Vprmmuvlqk tcysyuwtgh nqc gsfebu timmbkr  oeristpv jmjr ck nxfh',
+          deviceposition: 'fwe',
+          status: '在线',
+          display_time: '2021-03-31 17:58:00',
+          statusClass: 'status_on'
+        },
+        {
+          did: 'fv sds',
+          devicedistrict: 'Vprmmuvlqk tcysyuwtgh nqc gsfebu timmbkr  oeristpv jmjr ck nxfh',
+          deviceposition: 'ger',
+          status: '离线',
+          display_time: '2021-03-31 17:58:00',
+          statusClass: 'status_down'
+        },
+        {
+          did: '23423',
+          devicedistrict: '4353',
+          deviceposition: '566',
+          status: '1',
+          display_time: '2021-03-31 17:58:00',
+          statusClass: 'status_on'
+        }
+      ],
+      listLoading: false,
+      total: 23,
+      currentPage: 1, // 现在页
+			pageSize: 10, // 每页条数
       listQuery: {
         page: 1,
         limit: 10
-      }
+      },
+      temp: {
+        title: ''
+      },
+      dialogFormVisible: false,
+      dialogStatus: '',
+      credentialVisible:false,
+      credentialcontent:"{{json内容}}",
+      downloadLoading:false
     }
   },
   created() {
-    this.fetchData()
+    // this.fetchData()
   },
   methods: {
+    // 改变分页大小
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.scrollTop(0);
+      // this.devlist(this.param);
+    },
+    // 改变页数
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      // this.devlist(this.param, val);
+    },
+    // 改变滚动条的高度
+    scrollTop: function(height) {
+      var div = this.$refs['elscrollbar'].$refs['wrap'];
+      this.$nextTick(() => {
+        div.scrollTop = height
+      })
+    },
 
-    fetchData(){
+
+    fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getList(this.listQuery).then(response => {
         this.list = response.data.items
         this.total = response.data.total
         this.listLoading = false
+      })
+    },
+    handleFilter() {/*这里可以加个waves效果，接口需要有个get方法query接口，使用listQuery作为参数质询*/
+      this.listQuery.page = 1
+      // getList(this.listQuery).then(response => {
+      //   this.list = response.data.items
+      //   this.listLoading = false
+      // })这里调用接口
+    },
+    handleDownload() {
+      this.downloadLoading = true
+      console.log(this.list)
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ['id', 'did', 'district', 'position', 'display_time']
+        const filterVal = ['id', 'title', 'devicedistrict', 'deviceposition', 'display_time']
+        const data = this.formatJson(filterVal)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: 'table-list'
+        })
+        this.downloadLoading = false
+      })
+    },
+    formatJson(filterVal) {
+      return this.list.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
+    },
+    updateData() {
+      this.dialogFormVisible = false
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          const tempData = Object.assign({}, this.temp)// change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+          updateList(tempData).then(() => {/*这里要注意，还未设置updateList的api，无法confirm*/
+            const index = this.list.findIndex(v => v.id === this.temp.id)
+            this.list.splice(index, 1, this.temp)
+            this.dialogFormVisible = false
+            this.$notify({
+              title: 'Success',
+              message: 'Update Successfully',
+              type: 'success',
+              duration: 2000
+            })
+          })
+        }
       })
     },
     handleUpdate(row) {
@@ -142,14 +252,7 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
-    }, handleFilter() {/*这里可以加个waves效果，接口需要有个get方法query接口，使用listQuery作为参数质询*/
-      this.listQuery.page = 1
-      // getList(this.listQuery).then(response => {
-      //   this.list = response.data.items
-      //   this.listLoading = false
-      // })这里调用接口
     },
-
     handleDelete(row, index) {
       this.$notify({
         title: 'Success',
@@ -162,29 +265,169 @@ export default {
   }
 }
 </script>
-
+<style>
+.didlist-container .el-table td, .el-table th.is-leaf {
+    border-bottom: 1px solid #0b1a35;
+}
+.didlist-container .el-pagination {
+    white-space: nowrap;
+    padding: 2px 5px;
+    color: #8198be;
+    font-weight: 700;
+}
+.didlist-container .el-pagination button:disabled {
+    color: #C0C4CC;
+    background: none;
+}
+.didlist-container .el-pager li.active {
+    color: #2B9EFF;
+}
+.didlist-container .el-pager li {
+    background: none;
+}
+.didlist-container .el-pagination .btn-next, .el-pagination .btn-prev {
+    background: none;
+    color: #526c98;
+}
+.didlist-container .el-input__inner {
+  height: 32px !important;
+  border: 1px solid #17325F !important;
+  border-radius: 4px !important;
+  background: #0B1A37 !important;
+}
+.didlist-container .el-dialog {
+  width: 600px;
+  height: 320px;
+  background: url(../../assets/icon/Popup_bj.png) 100% 100% no-repeat;
+  border-radius: 10px;
+}
+.didlist-container .el-dialog__header {
+    border-bottom: 1px solid #1B3869;
+}
+.didlist-container .el-dialog__title {
+  line-height: 24px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2D61A8;
+}
+.didlist-container .el-dialog__headerbtn .el-dialog__close {
+  color: #526c98;
+  font-weight: 900;
+}
+</style>
 <style scoped>
-/*最外层透明*/
-/deep/ .el-table, /deep/ .el-table__expanded-cell {
-  background-color: transparent;
-  color: white;
+.dev_table  /deep/ .el-table:before {
+    background: none;
+}
+.dev_table  /deep/ .el-table, .el-table__expanded-cell {
+    background: none;
+}
+.dev_table  /deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {
+    background: #0B1A35;
+}
+.dev_table  /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color: #1B3565;
 }
 
-/* 表格内背景颜色 */
-/deep/ .el-table th,
-/deep/ .el-table tr,
-/deep/ .el-table td {
-  background-color: transparent;
-  color: white;
+.dev_table /deep/ .el-table th{
+  font-weight: bold;
+  background: #172B51;
+  color: #2D61A8;
+  font-size: 16px;
 }
-
-/*table item鼠标悬停颜色*/
-/deep/ .el-table tbody tr:hover > td {
-  background-color: #C0C4CC
+.dev_table /deep/ .el-table tr{
+  font-weight: 400;
+  background: rgba(14, 34, 69, 0.7);
+  color: #8198BE;
+  font-size: 16px;
 }
-
 .pagination-container {
   background-color: transparent;
 }
-
+.didlist_title /deep/ .el-breadcrumb {
+  font-size: 16px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+}
+.didlist_title /deep/ .el-breadcrumb__inner {
+  color: #526C98;
+}
+.didlist_title /deep/ .el-breadcrumb__separator {
+  color: #526C98;
+}
+.filter-container /deep/ .filter_iput{
+  width: 360px;
+  height: 36px;
+}
+.filter-container /deep/ .filter_iput .el-input__inner{
+  border: 1px solid #17325F;
+  border-radius: 4px;
+  height: 36px;
+  font-size: 16px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #C8D9F6;
+  border: none;
+  background: #0B1A37;
+}
+.filter-container /deep/ .filter_button{
+  margin-left: 12px;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #C8D9F6;
+  border: none;
+  background: #0F7DDA;
+}
+</style>
+<style lang="scss" scoped>
+.didlist-container{
+  height: 100%;
+  padding: 20px;
+  .didlist_title{
+    height: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    background: url(../../assets/icon/coordinate_icon.png) no-repeat center left;
+  }
+  .filter-container{
+    margin: 10px 0;
+  }
+  .dev_table{
+    height: calc(100% - 76px);
+    .DID_button{
+      font-size: 16px;
+      font-family: Microsoft YaHei;
+      font-weight: 400;
+      color: #2B9EFF;
+    }
+    .pass_button{
+      width: 60px;
+      height: 30px;
+      background: rgba(15, 125, 218, 0);
+      border: 1px solid #0F7DDA;
+      border-radius: 4px;
+      color: #2B9EFF;
+    }
+    .refuse_button{
+      width: 60px;
+      height: 30px;
+      background: rgba(194, 106, 72, 0);
+      border: 1px solid #C26A48;
+      color: #C26A48;
+      border-radius: 4px;
+    }
+  }
+  .sa-page{
+    text-align: center;
+    background: rgba(14, 34, 69, 0.7);
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 </style>
