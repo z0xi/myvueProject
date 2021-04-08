@@ -21,13 +21,20 @@ export default {
     height: {
       type: String,
       default: '300px'
-    }
+    },
+    inner:{
+    	type: Object,
+    },
+    outer:{
+    	type: Object,
+    },
   },
   data() {
     return {
       chart: null,
-      innerData:{name:"视频源总数",value:10356,color:"rgb(116,64,237)"},
-      outData:{name:"人像总数",value:1233,color:"rgb(44,158,255)"}
+      innerData:this.inner,
+      outData:this.outer,
+      myheight:this.height
     }
   },
   mounted() {
@@ -45,8 +52,55 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-      let _this = this, total = this.innerData.value + this.outData.value, innerData = this.innerData.value, outData = this.outData.value;
+      let _this = this, 
+      		total = this.innerData.value + this.outData.value, 
+      		innerData = this.innerData.value, 
+      		outData = this.outData.value,
+      		labelData = [this.outData.name, this.innerData.name];
       this.chart.setOption({
+      	yAxis: {
+	        type: 'category',
+	        data: labelData,
+	        splitLine:{show:false},
+          axisLine:{show:false},
+          axisTick:{show:false},
+          splitArea:{show:false},
+	        axisLabel:{
+	            inside:true,
+	            margin:18,
+	            textStyle:{
+	            	color:'rgb(179, 195, 224)'
+	            },
+	            formatter:function(value, index){
+	              let ret = '';
+	              switch (index){
+	                case 0:
+	                  ret = _this.innerData.name + '：' + _this.innerData.value;
+	                  break;
+	                case 1:
+	                  ret = _this.outData.name + '：' + _this.outData.value;
+	                  break;
+	              }
+	              return ret;
+	            },
+	        },
+	        z:2
+		    },
+		    xAxis: {
+	        type: 'value',
+	        splitLine:{show:false},
+          axisLine:{show:false},
+          axisTick:{show:false},
+          axisLabel:{show:false},
+          splitArea:{show:false},
+		    },
+		    grid:[
+		    	{
+		    		left:'50%',
+		    		bottom:'65%',
+		    		top:'19%'
+		    	}
+		    ],
         angleAxis: {
           max:total,
           clockwise:false,
@@ -59,47 +113,28 @@ export default {
         radiusAxis: {
           type: 'category',
           data: [_this.outData.name, _this.innerData.name],
+          boundaryGap:10,
           splitLine:{show:false},
           axisLine:{show:false},
           axisTick:{show:false},
-          axisLabel:{
-            show:true,
-            inside:true,
-            formatter:function(value, index){
-              let ret = '';
-              switch (index){
-                case 0:
-                  ret = _this.innerData.name + '：' + _this.innerData.value;
-                  break;
-                case 1:
-                  ret = _this.outData.name + '：' + _this.outData.value;
-                  break;
-              }
-              return ret;
-            },
-            textStyle:{
-            	color:'rgb(179, 195, 224)'
-            },
-          },
+          axisLabel:{show:false},
           splitArea:{show:false},
-          z:2
         },
         polar: {
           radius: [45, 95],
-          tooltip:{
-            show:true,
-            formatter: '{b0}: {c0}<br />{b1}: {c1}'
-          }
         },
         series: [{
           type: 'bar',
           data: [
-            { value: outData, name: _this.outData.name,itemStyle:{color:_this.outData.color} },
-            { value: innerData, name: _this.innerData.name,itemStyle:{color:_this.innerData.color} },
+            { value: innerData, itemStyle:{color:_this.innerData.color} },
+            { value: outData,itemStyle:{color:_this.outData.color} },
           ],
           roundCap: true, // 在环形柱条两侧，使用圆弧效果
           barWidth:15,
           coordinateSystem: 'polar'
+        },{
+			    type: 'bar',
+			    data: []
         }]
       })
     }
