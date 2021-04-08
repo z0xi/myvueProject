@@ -1,17 +1,14 @@
 <template>
-  <div class="didlist-container">
-    <div class="didlist_title">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>DID身份管理</el-breadcrumb-item>
-        <el-breadcrumb-item><span style="color:#8198BE;">已入网摄像头</span></el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+  <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.title" placeholder="DID" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.title" placeholder="DID" style="width: 200px;" class="filter-item"
+                @keyup.enter.native="handleFilter"
+      />
       <el-button v-waves class="filter-item" style="margin-left:12px" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
-      <el-button v-waves :loading="downloadLoading" style="margin-left:12px" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
+      <el-button v-waves :loading="downloadLoading" style="margin-left:12px" class="filter-item" type="primary" icon="el-icon-download"
+                 @click="handleDownload">
         导出
       </el-button>
     </div>
@@ -30,10 +27,11 @@
         </template>
       </el-table-column>
       <el-table-column label="DID" width="200" align="center">
-        <template slot-scope="scope">
+        <template slot-scope="scope" >
           <el-button type="text" @click="credentialVisible = true">{{ scope.row.did }}</el-button>
         </template>
       </el-table-column>
+      <
       <el-table-column label="摄像头区域" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.devicedistrict }}</span>
@@ -49,9 +47,11 @@
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="DID 创建时间" width="200">
+      <el-table-column align="center" prop="created_at" label="DID
+      创建时间" width="200"
+      >
         <template slot-scope="scope">
-          <i class="el-icon-time" />
+          <i class="el-icon-time"/>
           <span>{{ scope.row.display_time }}</span>
         </template>
       </el-table-column>
@@ -249,20 +249,6 @@ export default {
 .pagination-container {
   background-color: transparent;
 }
-</style>
-<style lang="scss">
-.didlist-container{
-  height: 100%;
-  padding: 20px;
-  .didlist_title{
-    background: url(../../assets/icon/coordinate_icon.png) no-repeat center center;
-    .el-breadcrumb__inner {
-      color: #526C98;
-    }
-    .el-breadcrumb__separator {
-      color: #526C98;
-    }
-  }
-  
-}
+
+
 </style>
