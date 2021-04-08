@@ -15,13 +15,13 @@
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper chart-wrapper-hasbg2">
         	<div class="chart-title">资源情况</div>
-          <taskBar />
+          <ringBar :inner="resourceStatus.inner" :outer="resourceStatus.outer"/>
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper chart-wrapper-hasbg3">
         	<div class="chart-title">抓拍及档案</div>
-          <taskBar />
+          <ringBar :inner="snapshotArchives.inner" :outer="snapshotArchives.outer"/>
         </div>
       </el-col>
     </el-row>
@@ -45,18 +45,28 @@ const lineChartData = {
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
 import devicePie from './components/devicePie'
-import taskBar from './components/ringBar'
+import ringBar from './components/ringBar'
 export default {
   name: 'DashboardAdmin',
   components: {
     PanelGroup,
     LineChart,
     devicePie,
-    taskBar
+    ringBar
   },
   data() {
     return {
-      lineChartData: lineChartData.messages
+      lineChartData: lineChartData.messages,
+      //资源情况
+      resourceStatus:{
+      	inner:{name:"视频源总数",value:123,color:"rgb(44, 158, 255)"},
+      	outer:{name:"人像总数",value:122,color:"rgb(116, 64, 237)"}
+      },
+      //抓拍及档案
+      snapshotArchives:{
+      	inner:{name:"活跃档案数",value:1233,color:"rgb(44, 158, 255)"},
+      	outer:{name:"抓拍总数",value:10325,color:"rgb(194, 105, 71)"}
+      },
     }
   },
   methods: {

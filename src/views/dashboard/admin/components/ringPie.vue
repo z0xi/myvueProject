@@ -59,6 +59,11 @@ export default {
 	            	color:'rgb(179, 195, 224)'
 	            }
             },
+            labelLayout:{
+            	x:0,
+            	y:'70%',
+            	moveOverlap:'shiftY'
+            },
             data: [
               { value: (total - innerData), name: '进行中',itemStyle:{color:"rgba(14, 34, 69, 0)"},label:{show:false} },
               { value: innerData, name: '已完成',itemStyle:{color:"rgb(116,64,237)"} },
@@ -82,6 +87,7 @@ export default {
               { value: (total - outData), name: '已完成',itemStyle:{color:"rgba(14, 34, 69, 0)"},label:{show:false} },
               { value: outData, name: '进行中',itemStyle:{color:"rgb(44, 158, 255)"} },
             ],
+            roundCap: true, // 在环形柱条两侧，使用圆弧效果
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }
