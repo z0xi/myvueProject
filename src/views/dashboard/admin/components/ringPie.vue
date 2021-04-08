@@ -25,7 +25,9 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      innerData:{name:"视频源总数",value:10356},
+      outData:{name:"人像总数",value:1233}
     }
   },
   mounted() {
@@ -43,32 +45,14 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-
+      let total = this.innerData.value + this.outData.value, innerData = this.innerData.value, outData = this.outData.value;
       this.chart.setOption({
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          right: '2',
-          top: '2',
-          itemHeight:'4',
-          icon: 'roundRect',
-          data: ['已完成', '进行中'],
-          textStyle:{
-          	color:'rgb(128,152,190)'
-          }
-        },
         series: [
           {
-            name: '任务数',
             type: 'pie',
-            radius: [65, 95],
+            radius: [45, 65],
             center: ['50%', '50%'],
-            itemStyle: {
-	            borderColor: 'rgba(14, 34, 69, 0.8)',
-	            borderWidth: 2
-            },
+            labelLine:{show:false},
             label: {
 	            formatter: '{b} : {c}',
 	            textStyle:{
@@ -76,8 +60,27 @@ export default {
 	            }
             },
             data: [
-              { value: 4, name: '已完成',itemStyle:{color:"rgb(50, 171, 118)"} },
-              { value: 1, name: '进行中',itemStyle:{color:"rgb(44, 158, 255)"} },
+              { value: (total - innerData), name: '进行中',itemStyle:{color:"rgba(14, 34, 69, 0)"},label:{show:false} },
+              { value: innerData, name: '已完成',itemStyle:{color:"rgb(116,64,237)"} },
+            ],
+            animationEasing: 'cubicInOut',
+            animationDuration: 2600
+          },
+          {
+            type: 'pie',
+            radius: [75, 95],
+            center: ['50%', '50%'],
+            labelLine:{show:false},
+            label: {
+              formatter: '{b} : {c}',
+              textStyle:{
+              	color:'rgb(179, 195, 224)'
+              },
+              position:['0','0']
+            },
+            data: [
+              { value: (total - outData), name: '已完成',itemStyle:{color:"rgba(14, 34, 69, 0)"},label:{show:false} },
+              { value: outData, name: '进行中',itemStyle:{color:"rgb(44, 158, 255)"} },
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600

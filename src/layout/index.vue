@@ -14,7 +14,7 @@
             <img src="../assets/icon/user_icon.png" alt="" class="user_img">
             {{ username }}<i class="el-icon-caret-bottom el-icon--right" />
           </span>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-menu slot="dropdown" class="admin_user_popper">
             <el-dropdown-item>修改信息</el-dropdown-item>
             <el-dropdown-item>修改密码</el-dropdown-item>
           </el-dropdown-menu>
@@ -110,4 +110,3 @@ export default {
   }
 }
 </script>
-

@@ -66,6 +66,7 @@ export default {
     height: 84px;
     margin: auto;
     display: flex;
+    cursor: pointer;
     .card-panel-left, .card-panel-right{
       flex: 1;
       position: relative;
@@ -96,6 +97,11 @@ export default {
   }
   .card_panel_bj{
     background: url(../../../../assets/icon/Focus_box.png) 100% 100% no-repeat;
+    &:hover{
+      .card-panel-num{
+        color: #3CC6FF;
+      }
+    }
   }
   .card_panel_bj_on{
     background: url(../../../../assets/icon/Focus_box_on.png) 100% 100% no-repeat;

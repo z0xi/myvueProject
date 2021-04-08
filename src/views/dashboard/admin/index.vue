@@ -1,25 +1,26 @@
 <template>
   <div class="dashboard_index">
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
-    <el-row style="height: 431px;margin-top:15px;">
+    <el-row class="chart-wrapper" style="height: 431px;margin-top:15px;">
+      <div class="chart-title">视频数详情</div>
       <line-chart :chart-data="lineChartData" />
     </el-row>
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
-        <div class="chart-wrapper">
-          <div class="chart-title">任务数</div>
+        <div class="chart-wrapper chart-wrapper-hasbg1">
+        	<div class="chart-title">任务数</div>
           <devicePie />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
-        <div class="chart-wrapper">
-          <div class="chart-title">资源情况</div>
+        <div class="chart-wrapper chart-wrapper-hasbg2">
+        	<div class="chart-title">资源情况</div>
           <taskBar />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
-        <div class="chart-wrapper">
-          <div class="chart-title">抓拍及档案</div>
+        <div class="chart-wrapper chart-wrapper-hasbg3">
+        	<div class="chart-title">抓拍及档案</div>
           <taskBar />
         </div>
       </el-col>
@@ -44,7 +45,7 @@ const lineChartData = {
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
 import devicePie from './components/devicePie'
-import taskBar from './components/taskBar'
+import taskBar from './components/ringBar'
 export default {
   name: 'DashboardAdmin',
   components: {
@@ -72,12 +73,22 @@ export default {
     height: 100%;
     padding: 20px;
     .chart-wrapper {
-      padding: 8px 8px 0;
-      margin-bottom: 8px;
+      padding: 8px 8px;
+      margin-bottom: 10px;
       border-radius: 6px;
-      background: url(../../../assets/icon/chart_bg1.png) no-repeat center center;
       background-color: rgba(14, 34, 69, 0.8);
       position: relative;
+      &::after{
+        content: "";
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        position: absolute;
+        top: calc(50% - 35px);
+        left: calc(50% - 35px);
+        border-radius: 100% 100%;
+        z-index: 1;
+      }
       .chart-title{
         color: rgb(128,152,190);
         background: url(../../../assets/icon/title_icon.png) no-repeat left center;
@@ -87,6 +98,27 @@ export default {
         position: absolute;
         top: 10px;
         left: 10px;
+      }
+    }
+    .chart-wrapper-hasbg1{
+      &::after{
+        background: url(../../../assets/icon/chart_bg1.png) no-repeat center center;
+        background-color: rgb(35,63,111);
+        background-size: 35px 35px;
+      }
+    }
+    .chart-wrapper-hasbg2{
+      &::after{
+        background: url(../../../assets/icon/chart_bg2.png) no-repeat center center;
+        background-color: rgb(35,63,111);
+        background-size: 35px 35px;
+      }
+    }
+    .chart-wrapper-hasbg3{
+      &::after{
+        background: url(../../../assets/icon/chart_bg3.png) no-repeat center center;
+        background-color: rgb(35,63,111);
+        background-size: 35px 35px;
       }
     }
 }
