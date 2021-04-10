@@ -76,26 +76,34 @@
         class="sa-page"
         :current-page="currentPage"
         :page-sizes="[10, 20, 30, 50]"
-        :page-size="pageSize" layout="prev, pager, next, sizes, jumper"
+        :page-size="pageSize"
+        layout="prev, pager, next, sizes, jumper"
         :total="total"
         @size-change="handleSizeChange"
-        @current-change="handleCurrentChange">
-      </el-pagination>
+        @current-change="handleCurrentChange"
+      />
+      <!-- </el-pagination> -->
     </div>
-    
     <!-- <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
                 @pagination="fetchData"
     /> -->
 
-    <el-dialog title="修改该摄像头信息" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :model="temp" label-position="left" label-width="100px"
-               style="width: 400px; margin-left:50px;"
+    <el-dialog
+      title="修改该摄像头信息"
+      :visible.sync="dialogFormVisible"
+    >
+      <el-form
+        ref="dataForm"
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="width: 400px; margin-left:50px;"
       >
         <el-form-item label="DID：" prop="DID">
-          <el-input v-model="temp.title"/>
+          <el-input v-model="temp.title" />
         </el-form-item>
         <el-form-item label="摄像头位置：" prop="cameralocation">
-          <el-input v-model="temp.author"/>
+          <el-input v-model="temp.author" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -108,8 +116,8 @@
     <el-dialog
       title="DID详细信息"
       :visible.sync="credentialVisible"
-      >
-      <span>{{credentialcontent}}}</span>
+    >
+      <span>{{ credentialcontent }}}</span>
       <!-- <span slot="footer" class="dialog-footer">
         <el-button @click="credentialVisible = false">取 消</el-button>
         <el-button type="primary" @click="credentialVisible = false">确 定</el-button>
@@ -121,11 +129,10 @@
 <script>
 import { getList } from '@/api/did'
 import waves from '@/directive/waves' // waves directive
-import Pagination from '@/components/Pagination'
+// import Pagination from '@/components/Pagination'
 // import picture from '@/assets/bg.png' // secondary package based on el-pagination
 export default {
-  name: 'didlist',
-  components: { Pagination },
+  // components: { Pagination },
   directives: { waves },
   filters: {
     statusFilter(status) {
@@ -168,7 +175,7 @@ export default {
       listLoading: false,
       total: 23,
       currentPage: 1, // 现在页
-			pageSize: 10, // 每页条数
+      pageSize: 10, // 每页条数
       listQuery: {
         page: 1,
         limit: 10
@@ -178,9 +185,9 @@ export default {
       },
       dialogFormVisible: false,
       dialogStatus: '',
-      credentialVisible:false,
-      credentialcontent:"{{json内容}}",
-      downloadLoading:false
+      credentialVisible: false,
+      credentialcontent: '{{json内容}}',
+      downloadLoading: false
     }
   },
   created() {
@@ -189,24 +196,22 @@ export default {
   methods: {
     // 改变分页大小
     handleSizeChange(val) {
-      this.pageSize = val;
-      this.scrollTop(0);
+      this.pageSize = val
+      this.scrollTop(0)
       // this.devlist(this.param);
     },
     // 改变页数
     handleCurrentChange(val) {
-      this.currentPage = val;
+      this.currentPage = val
       // this.devlist(this.param, val);
     },
     // 改变滚动条的高度
     scrollTop: function(height) {
-      var div = this.$refs['elscrollbar'].$refs['wrap'];
+      var div = this.$refs['elscrollbar'].$refs['wrap']
       this.$nextTick(() => {
         div.scrollTop = height
       })
     },
-
-
     fetchData() {
       this.listLoading = true
       getList(this.listQuery).then(response => {
@@ -215,7 +220,7 @@ export default {
         this.listLoading = false
       })
     },
-    handleFilter() {/*这里可以加个waves效果，接口需要有个get方法query接口，使用listQuery作为参数质询*/
+    handleFilter() { /* 这里可以加个waves效果，接口需要有个get方法query接口，使用listQuery作为参数质询 */
       this.listQuery.page = 1
       // getList(this.listQuery).then(response => {
       //   this.list = response.data.items
@@ -239,29 +244,29 @@ export default {
     },
     formatJson(filterVal) {
       return this.list.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
+        // if (j === 'timestamp') {
+        //   return parseTime(v[j])
+        // } else {
+        //   return v[j]
+        // }
       }))
     },
     updateData() {
       this.dialogFormVisible = false
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          const tempData = Object.assign({}, this.temp)// change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-          updateList(tempData).then(() => {/*这里要注意，还未设置updateList的api，无法confirm*/
-            const index = this.list.findIndex(v => v.id === this.temp.id)
-            this.list.splice(index, 1, this.temp)
-            this.dialogFormVisible = false
-            this.$notify({
-              title: 'Success',
-              message: 'Update Successfully',
-              type: 'success',
-              duration: 2000
-            })
-          })
+          // const tempData = Object.assign({}, this.temp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+          // updateList(tempData).then(() => { /* 这里要注意，还未设置updateList的api，无法confirm */
+          //   const index = this.list.findIndex(v => v.id === this.temp.id)
+          //   this.list.splice(index, 1, this.temp)
+          //   this.dialogFormVisible = false
+          //   this.$notify({
+          //     title: 'Success',
+          //     message: 'Update Successfully',
+          //     type: 'success',
+          //     duration: 2000
+          //   })
+          // })
         }
       })
     },
@@ -404,7 +409,7 @@ export default {
 <style lang="scss" scoped>
 .didlist-container{
   height: 100%;
-  padding: 20px;
+  padding: 15px 20px;
   .didlist_title{
     height: 20px;
     width: 100%;

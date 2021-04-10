@@ -392,7 +392,7 @@ export default {
 <style lang="scss" scoped>
 .didlist-container{
   height: 100%;
-  padding: 20px;
+  padding: 15px 20px;
   .didlist_title{
     height: 20px;
     width: 100%;

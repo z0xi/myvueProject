@@ -76,3 +76,33 @@ div:focus {
   background: url("../../src/assets/bg.png");
   background-size: cover;
 }
+.didlist_title{
+  height: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  background: url(../assets/icon/coordinate_icon.png) no-repeat center left;
+  .el-breadcrumb {
+    font-size: 16px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+  }
+  .el-breadcrumb__inner {
+    color: #526C98;
+  }
+  .el-breadcrumb__separator {
+    color: #526C98;
+  }
+}
+// .didlist_title  .el-breadcrumb {
+//   font-size: 16px;
+//   font-family: Microsoft YaHei;
+//   font-weight: 400;
+// }
+// .didlist_title .el-breadcrumb__inner {
+//   color: #526C98;
+// }
+// .didlist_title .el-breadcrumb__separator {
+//   color: #526C98;
+// }

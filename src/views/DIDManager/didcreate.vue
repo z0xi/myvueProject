@@ -1,93 +1,102 @@
 <template>
-  <div class="app-container">
-    <el-upload
-      class="upload-demo"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="1"
-      :on-exceed="handleExceed"
-      :file-list="fileList">
-      <el-button size="big" type="primary">点击上传</el-button>
-      <div slot="tip" class="el-upload__tip">批量上传摄像头信息</div>
-    </el-upload>
-    <el-form  ref="form" :model="form" label-width="160px">
-      <el-form-item label="摄像头设备名称:">
-        <el-input v-model="form.deviceName" />
-      </el-form-item>
-      <el-form-item label="摄像头设备信息:">
-        <el-input v-model="form.deviceInfo" />
-      </el-form-item>
-      <el-form-item label="摄像头类别:">
-        <el-input v-model="form.deviceCategory" />
-      </el-form-item>
-      <el-form-item label="摄像头区域:">
-        <el-input v-model="form.deviceDistrict" />
-      </el-form-item>
-      <el-form-item label="摄像头位置:">
-        <el-input v-model="form.devicePosition" />
-      </el-form-item>
-      <el-form-item label="所属单位:">
-        <el-input v-model="form.deviceOrganization" />
-      </el-form-item>
-      <el-form-item>
-        <el-tooltip class="item" effect="dark" content="点击为摄像头创建DID’" placement="right-end">
-          <el-button type="primary" @click="onSubmit">创建</el-button>
-        </el-tooltip>
-      </el-form-item>
-    </el-form>
+  <div class="DID_didcreate">
+    <div class="didlist_title">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item>DID身份管理</el-breadcrumb-item>
+        <el-breadcrumb-item><span style="color:#8198BE;">摄像头DID注册</span></el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <div class="cpt">
+      <div class="cpt_title">
+        <div v-for="item in cptTitleData" :key="item.id" :style="item.style" :class="item.active" class="cpt_title_div" @click="tabClick(item.id)">{{ item.name }}</div>
+      </div>
+      <div class="cpt_main">
+        <didcreateCpt />
+      </div>
+    </div>
   </div>
 </template>
-
-
 <script>
-import { mapGetters } from 'vuex'
-
+// import { mapGetters } from 'vuex'
+import didcreateCpt from './didcreate/index'
 export default {
-  name: 'didcreate',
-
+  components: {
+    didcreateCpt
+  },
   data() {
     return {
-      form: {
-        deviceCategory:'A类',
-        location:'广东省广州市XXX',
-        deviceDistrict:"广东省广州市番禺区XX路",
-        devicePosition:'XX路XX号房',
-        deviceOrganization:'居委会',
-        deviceName:'小米XX型号',
-        deviceInfo:'小米摄像头'
-      },
-      fileList: [{name: '', url: ''}]
+      cptTitleData: [
+        {
+          id: 1,
+          name: 'CPT模板1',
+          style: { position: 'relative', left: '0px' },
+          active: ''
+        },
+        {
+          id: 2,
+          name: 'CPT模板2',
+          style: { position: 'relative', left: '-10px' },
+          active: 'active'
+        },
+        {
+          id: 3,
+          name: 'CPT模板3',
+          style: { position: 'relative', left: '-20px' },
+          active: ''
+        }
+      ]
     }
   },
   methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`只能上传一个文件`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
-      },
-    onSubmit() {
-      this.$message('submit!')
-    },
-    onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning'
+    tabClick(e) {
+      this.cptTitleData.map((v, i) => {
+        if (v.id === e) {
+          v.active = 'active'
+        } else {
+          v.active = ''
+        }
       })
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss"  scoped>
+.DID_didcreate{
+  height: 100%;
+  padding:15px 20px;
+  .tab_pane_div{
+    height: 100%;
+  }
+  .cpt{
+    height: calc(100% - 35px);
+    margin-top: 15px;
+    .cpt_title{
+      height: 40px;
+      display: flex;
+      .cpt_title_div{
+        width: 167px;
+        height: 40px;
+        color: #8098BE;
+        font-size: 18px;
+        line-height: 40px;
+        padding-left: 15px;
+        border-radius: 6px 0px 0px 0px;
+        cursor:pointer;
+        background: url(../../assets/icon/tab_bj.png) 100% 100% no-repeat;
+        // border: 1px solid #152E58;
+      }
+      .active{
+        color: #C8D9F6;
+        font-weight: bold;
+        z-index: 2;
+        background: url(../../assets/icon/tab_active.png) 100% 100% no-repeat;
+      }
+    }
+    .cpt_main{
+      height: calc(100% - 40px);
+      margin-top: -1px;
+    }
+  }
+}
 </style>
