@@ -105,6 +105,19 @@ export default {
   }
   .card_panel_bj_on{
     background: url(../../../../assets/icon/Focus_box_on.png) 100% 100% no-repeat;
+    position: relative;
+    &::after{
+    	display: inline-block;
+    	content: "";
+    	width: 0;
+	    height: 0;
+	    border-left: 8px solid transparent;
+	    border-right: 8px solid transparent;
+	    border-bottom: 10px solid rgba(14, 34, 69, 0.8);
+	    position: absolute;
+	    bottom: -15px;
+	    left: calc(50% - 4px);
+    }
   }
 }
 
