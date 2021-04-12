@@ -6,7 +6,26 @@
       </div>
     </div>
     <div class="register_main">
-      <el-form ref="form" :model="form" label-width="130px" class="register_form">
+      <div class="register_upload" v-if="registerMain">
+        <!-- <div class="div_upload"> :show-file-list="false"-->
+          <el-upload
+            class="div_upload"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            :on-success="uploadSuccess"
+            multiple
+            :limit="1"
+            :on-exceed="handleExceed"
+            >
+            <div class="el-upload__text">点击上传</div>
+            <div slot="tip" class="el-upload__tip">批量上传摄像头信息</div>
+          </el-upload>
+        <!-- </div> -->
+        <div class="div_upload_main"></div>
+      </div>
+      <el-form ref="form" :model="form" v-else label-width="130px" class="register_form">
         <el-form-item label="摄像头设备名称:">
           <el-input v-model="form.deviceName" />
         </el-form-item>
@@ -38,6 +57,8 @@
 export default {
   data() {
     return {
+      registerMain: true,
+      fileList: [],
       register: [
         {
           id: 1,
@@ -62,6 +83,31 @@ export default {
     }
   },
   methods: {
+    uploadSuccess(response, file, fileList){
+      console.log('rr:',response,'tt:', file, 'yy:',fileList);
+      this.fileList = fileList;
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`只能上传一个文件`);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${ file.name }？`);
+    },
+    onSubmit() {
+      this.$message('submit!')
+    },
+    onCancel() {
+      this.$message({
+        message: 'cancel!',
+        type: 'warning'
+      })
+    },
     registerActive(e) {
       this.register.map((v, i) => {
         if (v.id === e) {
@@ -70,6 +116,11 @@ export default {
           v.active = ''
         }
       })
+      if(e === 1){
+        this.registerMain = true
+      } else {
+        this.registerMain = false
+      }
     }
   }
 }
@@ -94,6 +145,30 @@ export default {
   color: #C8D9F6;
   border: none;
   background: #0F7DDA;
+}
+.didcreateCpt /deep/ .el-upload-list {
+  position: absolute;
+  left: 285px;
+  top: 0px;
+}
+.didcreateCpt /deep/ .el-upload-list .el-upload-list__item-name {
+  color: #8098BE;
+  font-size: 16px;
+}
+.didcreateCpt /deep/ .el-upload-list .el-upload-list__item:hover {
+  background: none;
+}
+.didcreateCpt /deep/ .el-upload-list .el-upload-list__item.is-success .el-upload-list__item-name:hover {
+  color: #C8D9F6;
+}
+.didcreateCpt /deep/ .el-upload-list .el-upload-list__item-name [class^=el-icon] {
+  color: #8098BE;
+}
+.didcreateCpt /deep/ .el-upload-list .el-upload-list__item .el-icon-close {
+  color: #C8D9F6;
+}
+.didcreateCpt /deep/ .el-upload-list .el-upload-list__item .el-icon-close:hover {
+  color: #C8D9F6;
 }
 </style>
 <style lang="scss" scoped>
@@ -133,6 +208,46 @@ export default {
       margin: auto;
       .submit{
         text-align: center;
+      }
+    }
+    .register_upload{
+      width: 900px;
+      margin: auto;
+      .div_upload{
+        width: 260px;
+        height: 300px;
+        border: 1px dashed #2A4B87;
+        border-radius: 4px;
+        float: left;
+        position: relative;
+        text-align: center;
+        background: rgba(42, 71, 124, 0.3) url(../../../assets/icon/upload_icon.png) center 65px no-repeat;
+        .el-upload__text{
+          color: #2B9EFF;
+          position: absolute;
+          top: 208px;
+          font-size: 16px;
+          margin-left: -32px;
+        }
+        .el-upload__tip{
+          color: #526C98;
+          position: relative;
+          top: 208px;
+          font-size: 16px;
+        }
+      }
+      .div_upload_main{
+        width: 630px;
+        height: 300px;
+        background: #0B1A37;
+        border: 1px solid #17325F;
+        border-radius: 4px;
+        float: right;
+      }
+      &::after{
+        content:'';
+        clear: both;
+        display: block;
       }
     }
   }
