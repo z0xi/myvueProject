@@ -45,7 +45,6 @@
             :collapse="isCollapse"
             :unique-opened="true"
             :router="true"
-            :popper-class="wwwww"
           >
             <template v-for="menu in routes">
               <el-menu-item v-if="menu.meta === undefined&&!menu.hidden" :key="menu.path" :index="Path(menu.path)">
