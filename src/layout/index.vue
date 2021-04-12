@@ -29,7 +29,7 @@
     <div class="main" :class="switchMain">
       <div class="nav_left">
         <el-scrollbar class="main-scrollbar" wrap-class="scrollbar-wrapper">
-          <el-menu
+          <!--<el-menu
             :default-active="defaultActive"
             class="nav_el_menu el-menu-vertical-demo"
             :collapse="isCollapse"
@@ -38,6 +38,14 @@
             text-color="#8098BE"
             active-text-color="#2B9EFF"
             :router="true"
+          >-->
+          <el-menu
+            :default-active="defaultActive"
+            class="nav_el_menu el-menu-vertical-demo"
+            :collapse="isCollapse"
+            :unique-opened="true"
+            :router="true"
+            :popper-class="wwwww"
           >
             <template v-for="menu in routes">
               <el-menu-item v-if="menu.meta === undefined&&!menu.hidden" :key="menu.path" :index="Path(menu.path)">

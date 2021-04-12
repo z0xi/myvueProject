@@ -95,7 +95,7 @@
         .nav_left {
             width: 280px;
             height: 100%;
-            background: #020c1c;
+            background: #020C1C;
             .main-scrollbar{
                 height: 100%;
                 .scrollbar-wrapper{
@@ -108,75 +108,96 @@
             .nav_el_menu {
                 transition: width .28s;
                 .el-menu-item {
-                    margin-bottom: 2px;
                     display: flex;
                     align-items: center;
                     border-right: none;
+                    background: #0A1D3C;
+                    color: #8098BE;
+                    border-bottom: 2px solid #020C1C;
+                    &:hover{
+                        color: #2B9EFF;
+                    }
+                }
+                .el-menu-item.is-active{
+                    color: #2B9EFF;
                 }
                 .el-submenu {
                     .el-submenu__title {
-                        margin-bottom: 2px;
+                        border-bottom: 2px solid #020C1C;
                         background-color: #0A1D3C !important;
+                        color: #8098BE;
                     }
                     .el-menu {
                         padding: 0 10px;
-                    }
-                    .el-menu-item {
-                        height: 40px;
-                        line-height: 40px;
-                        font-size: 16px;
-                        padding-left: 56px !important;
-                        min-width: 200px;
-                        &:hover {
+                        background: #020C1C;
+                        .el-menu-item {
+                            height: 40px;
+                            line-height: 40px;
+                            font-size: 16px;
+                            padding-left: 56px !important;
+                            min-width: 200px;
+                            background: #020C1C;
+                            &:hover {
+                                color: #2B9EFF;
+                            }
+                        }
+                        .el-menu-item.is-active{
                             color: #ffffff !important;
                             background: linear-gradient(90deg, #20A2F4, #3956C3);
                             border-radius: 4px;
                         }
                     }
                 }
+                .el-submenu.is-active{
+                    .el-submenu__title {
+                        color: #2B9EFF;
+                    }
+                }
                 .menu_img_icon {
                     width: 24px;
                     display: inline-block;
+                    width: 24px;
+                    height: 24px;
                 }
-                .host_icon:before {
-                    content: "";
-                    display: block;
+                .host_icon {
                     background: url(../assets/nav_icon/host_icon_down.png)center center no-repeat;
                     background-size: 100% 100%;
-                    width: 24px;
-                    height: 24px;
                 }
-                .didmanager_icon:before {
-                    content: "";
-                    display: block;
+                .el-menu-item.is-active .host_icon{
+                    background: url(../assets/nav_icon/host_icon_up.png)center center no-repeat;
+                    background-size: 100% 100%;
+                }
+                .didmanager_icon{
                     background: url(../assets/nav_icon/didmanager_icon_down.png)center center no-repeat;
                     background-size: 100% 100%;
-                    width: 24px;
-                    height: 24px;
                 }
-                .VideoFunction_icon:before {
-                    content: "";
-                    display: block;
+                .el-submenu.is-active .didmanager_icon{
+                    background: url(../assets/nav_icon/didmanager_icon_up.png)center center no-repeat;
+                    background-size: 100% 100%;
+                }
+                .VideoFunction_icon{
                     background: url(../assets/nav_icon/VideoFunction_icon_down.png)center center no-repeat;
                     background-size: 100% 100%;
-                    width: 24px;
-                    height: 24px;
                 }
-                .document_icon:before {
-                    content: "";
-                    display: block;
+                .el-submenu.is-active .VideoFunction_icon{
+                    background: url(../assets/nav_icon/VideoFunction_icon_up.png)center center no-repeat;
+                    background-size: 100% 100%;
+                }
+                .document_icon{
                     background: url(../assets/nav_icon/document_icon_down.png)center center no-repeat;
                     background-size: 100% 100%;
-                    width: 24px;
-                    height: 24px;
                 }
-                .taskManager_icon:before {
-                    content: "";
-                    display: block;
+                .el-submenu.is-active .document_icon{
+                    background: url(../assets/nav_icon/document_icon_up.png)center center no-repeat;
+                    background-size: 100% 100%;
+                }
+                .taskManager_icon{
                     background: url(../assets/nav_icon/taskManager_icon_down.png)center center no-repeat;
                     background-size: 100% 100%;
-                    width: 24px;
-                    height: 24px;
+                }
+                .el-submenu.is-active .taskManager_icon{
+                    background: url(../assets/nav_icon/taskManager_icon_up.png)center center no-repeat;
+                    background-size: 100% 100%;
                 }
                 .menu_title {
                     padding-left: 22px;
@@ -217,5 +238,27 @@
     border-bottom-color:rgb(43, 76, 138);
     &::after{
         border-bottom-color: rgb(11, 28, 59);
+    }
+}
+.el-menu--vertical{
+    .el-menu {
+        padding: 10px;
+        background: #020C1C;
+        .el-menu-item {
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            background: #020C1C;
+            color: #8098BE;
+            &:hover {
+                color: #2B9EFF;
+                background-color: #020C1C !important;
+            }
+        }
+        .el-menu-item.is-active{
+            color: #ffffff;
+            background: linear-gradient(90deg, #20A2F4, #3956C3);
+            border-radius: 4px;
+        }
     }
 }
