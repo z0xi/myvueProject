@@ -96,6 +96,12 @@
             width: 280px;
             height: 100%;
             background: #020c1c;
+            .main-scrollbar{
+                height: 100%;
+                .scrollbar-wrapper{
+                    overflow-x: auto;
+                }
+            }
             .el-menu {
                 border-right: none;
             }

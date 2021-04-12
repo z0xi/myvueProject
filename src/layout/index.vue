@@ -28,7 +28,7 @@
     </div>
     <div class="main" :class="switchMain">
       <div class="nav_left">
-        <el-scrollbar style="height:100%">
+        <el-scrollbar class="main-scrollbar" wrap-class="scrollbar-wrapper">
           <el-menu
             :default-active="defaultActive"
             class="nav_el_menu el-menu-vertical-demo"
