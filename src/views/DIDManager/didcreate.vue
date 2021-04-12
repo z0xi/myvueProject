@@ -11,20 +11,26 @@
         <div v-for="item in cptTitleData" :key="item.id" :style="item.style" :class="item.active" class="cpt_title_div" @click="tabClick(item.id)">{{ item.name }}</div>
       </div>
       <div class="cpt_main">
-        <didcreateCpt />
+        <!-- <didcreateCpt /> -->
+        <component v-bind:is="didcreateCpts"></component>
       </div>
     </div>
   </div>
 </template>
 <script>
 // import { mapGetters } from 'vuex'
-import didcreateCpt from './didcreate/index'
+import didcreateCpt1 from './didcreate/didcreateCpt1'
+import didcreateCpt2 from './didcreate/didcreateCpt2'
+import didcreateCpt3 from './didcreate/didcreateCpt3'
 export default {
   components: {
-    didcreateCpt
+    didcreateCpt1,
+    didcreateCpt2,
+    didcreateCpt3
   },
   data() {
     return {
+      didcreateCpts: 'didcreateCpt2',
       cptTitleData: [
         {
           id: 1,
@@ -49,6 +55,13 @@ export default {
   },
   methods: {
     tabClick(e) {
+      if(e === 1){
+        this.didcreateCpts = 'didcreateCpt1'
+      } else if(e === 2){
+        this.didcreateCpts = 'didcreateCpt2'
+      } else {
+        this.didcreateCpts = 'didcreateCpt3'
+      }
       this.cptTitleData.map((v, i) => {
         if (v.id === e) {
           v.active = 'active'

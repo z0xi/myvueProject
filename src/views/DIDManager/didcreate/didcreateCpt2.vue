@@ -24,6 +24,11 @@
           </el-upload>
         <!-- </div> -->
         <div class="div_upload_main"></div>
+        <div class="uploadSubmit">
+          <el-tooltip class="item" effect="dark" content="点击为摄像头创建DID’" placement="right-end">
+            <el-button class="establish_button">创建</el-button>
+          </el-tooltip>
+        </div>
       </div>
       <el-form ref="form" :model="form" v-else label-width="130px" class="register_form">
         <el-form-item label="摄像头设备名称:">
@@ -244,11 +249,16 @@ export default {
         border-radius: 4px;
         float: right;
       }
-      &::after{
-        content:'';
+      .uploadSubmit{
         clear: both;
-        display: block;
+        text-align: center;
+        padding-top: 72px;
       }
+      // &::after{
+      //   content:'';
+      //   clear: both;
+      //   display: block;
+      // }
     }
   }
 }
