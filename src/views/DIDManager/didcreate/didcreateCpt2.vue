@@ -254,11 +254,6 @@ export default {
         text-align: center;
         padding-top: 72px;
       }
-      // &::after{
-      //   content:'';
-      //   clear: both;
-      //   display: block;
-      // }
     }
   }
 }
